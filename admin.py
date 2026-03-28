@@ -18,7 +18,7 @@ DATA_DIR  = os.path.join(BASE_DIR, 'data')
 DB_PATH   = os.path.join(DATA_DIR, 'doughknot.db')
 CONTENT_PATH  = os.path.join(DATA_DIR, 'content.json')
 UPLOADS_DIR   = os.path.join(BASE_DIR, 'brand_assets', 'uploads')
-ADMIN_PASSWORD = 'doughknot2026'   # ← change this
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'doughknot2026')
 
 os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(UPLOADS_DIR, exist_ok=True)
