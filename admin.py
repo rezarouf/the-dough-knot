@@ -317,6 +317,59 @@ def delete_bestseller(idx):
     return jsonify({'ok': True})
 
 
+# ── WORKSHOPS ──
+@app.route('/api/workshops', methods=['GET'])
+def get_workshops():
+    c = load_content()
+    return jsonify(c.get('workshops', {'previous': [], 'upcoming': []}))
+
+@app.route('/api/workshops/previous', methods=['PUT'])
+@requires_auth
+def put_workshops_previous():
+    data = request.get_json(silent=True) or []
+    c = load_content()
+    if 'workshops' not in c:
+        c['workshops'] = {'previous': [], 'upcoming': []}
+    c['workshops']['previous'] = data
+    save_content(c)
+    return jsonify({'ok': True})
+
+@app.route('/api/workshops/upcoming', methods=['PUT'])
+@requires_auth
+def put_workshops_upcoming():
+    data = request.get_json(silent=True) or []
+    c = load_content()
+    if 'workshops' not in c:
+        c['workshops'] = {'previous': [], 'upcoming': []}
+    c['workshops']['upcoming'] = data
+    save_content(c)
+    return jsonify({'ok': True})
+
+@app.route('/api/workshops/previous/<int:idx>', methods=['DELETE'])
+@requires_auth
+def delete_workshop_previous(idx):
+    c = load_content()
+    items = c.get('workshops', {}).get('previous', [])
+    if 0 <= idx < len(items):
+        items.pop(idx)
+    if 'workshops' in c:
+        c['workshops']['previous'] = items
+    save_content(c)
+    return jsonify({'ok': True})
+
+@app.route('/api/workshops/upcoming/<int:idx>', methods=['DELETE'])
+@requires_auth
+def delete_workshop_upcoming(idx):
+    c = load_content()
+    items = c.get('workshops', {}).get('upcoming', [])
+    if 0 <= idx < len(items):
+        items.pop(idx)
+    if 'workshops' in c:
+        c['workshops']['upcoming'] = items
+    save_content(c)
+    return jsonify({'ok': True})
+
+
 @app.route('/api/gallery', methods=['GET'])
 def get_gallery():
     c = load_content()

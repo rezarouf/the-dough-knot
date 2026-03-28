@@ -392,6 +392,7 @@
       <div class="nav-item" onclick="showPage('bestsellers')">
         <span class="icon">⭐</span> Best Sellers
       </div>
+        <div class="nav-item" onclick="showPage('workshops')"><span class="icon">🎓</span> Workshops</div>
       <div class="nav-section">Business</div>
       <div class="nav-item" onclick="showPage('orders')">
         <span class="icon">📋</span> Orders <span class="nav-badge" id="orders-badge" style="display:none">0</span>
@@ -729,6 +730,81 @@
         </div>
       </div>
 
+      <!-- Workshops Page -->
+      <div class="page" id="page-workshops">
+        <div class="panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5em">
+            <h3 style="margin:0">Previous Workshops</h3>
+            <button class="btn" onclick="openAddWorkshop('previous')">+ Add Workshop</button>
+          </div>
+          <div id="workshops-prev-list"></div>
+        </div>
+        <div class="panel" style="margin-top:1.5em">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5em">
+            <h3 style="margin:0">Upcoming Workshops</h3>
+            <button class="btn" onclick="openAddWorkshop('upcoming')">+ Add Workshop</button>
+          </div>
+          <div id="workshops-new-list"></div>
+        </div>
+      </div>
+
+      <!-- Workshop Modal -->
+      <div class="modal-overlay hidden" id="workshop-modal">
+        <div class="modal" style="max-width:540px">
+          <div class="modal-hd">
+            <h3 id="workshop-modal-title">Add Workshop</h3>
+            <button class="modal-close" onclick="closeWorkshopModal()">✕</button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="wm-type">
+            <input type="hidden" id="wm-idx" value="-1">
+            <div class="field">
+              <label>Workshop Name</label>
+              <input type="text" id="wm-name" placeholder="e.g. Fondant Cake Masterclass">
+            </div>
+            <div class="field">
+              <label>Date</label>
+              <input type="text" id="wm-date" placeholder="e.g. April 15, 2026">
+            </div>
+            <div class="field">
+              <label>Description</label>
+              <textarea id="wm-desc" rows="3" placeholder="Short description of the workshop"></textarea>
+            </div>
+            <div id="wm-prev-images-section">
+              <div class="field">
+                <label>Workshop Photos (multiple)</label>
+                <div id="wm-images-list" style="display:flex;flex-wrap:wrap;gap:0.5em;margin-bottom:0.5em"></div>
+                <button class="btn btn-sm" onclick="wmAddImage()">+ Add Photo</button>
+              </div>
+            </div>
+            <div id="wm-new-fields-section" style="display:none">
+              <div class="field">
+                <label>Cover Image</label>
+                <div style="display:flex;gap:0.5em;align-items:center">
+                  <img id="wm-img-preview" src="" style="width:80px;height:60px;object-fit:cover;border-radius:4px;display:none">
+                  <button class="btn btn-sm" onclick="openImagePicker('__wm__','','wm-img-preview')">Pick Image</button>
+                </div>
+                <input type="hidden" id="wm-img-url">
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1em">
+                <div class="field">
+                  <label>Price (AED)</label>
+                  <input type="number" id="wm-price" placeholder="350">
+                </div>
+                <div class="field">
+                  <label>Spots Left</label>
+                  <input type="number" id="wm-spots" placeholder="8">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-ghost" onclick="closeWorkshopModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveWorkshop()">Save</button>
+          </div>
+        </div>
+      </div>
+
       <!-- ══ ORDERS ══ -->
       <div class="page" id="page-orders">
         <div class="panel">
@@ -926,7 +1002,7 @@ async function loadImages() {
 }
 
 // ── NAVIGATION ────────────────────────────────────────────────────────────────
-const PAGE_TITLES = {dashboard:'Dashboard',content:'Text & Images',menu:'Menu',gallery:'Gallery',baker:'Baker / Founder',testimonials:'Testimonials',bestsellers:'Best Sellers',orders:'Orders',analytics:'Analytics'};
+const PAGE_TITLES = {dashboard:'Dashboard',content:'Text & Images',menu:'Menu',gallery:'Gallery',baker:'Baker / Founder',testimonials:'Testimonials',bestsellers:'Best Sellers', workshops: 'Workshops',orders:'Orders',analytics:'Analytics'};
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+name).classList.add('active');
@@ -940,6 +1016,7 @@ function showPage(name) {
   if (name==='baker') loadBakerPage();
   if (name==='testimonials') loadTestimonialsPage();
   if (name==='bestsellers') loadBestSellersPage();
+  if (name==='workshops') loadWorkshopsPage();
   if (name==='content') loadSlidesPanel();
 }
 function switchTab(btn, paneId) {
@@ -1087,6 +1164,18 @@ async function confirmImagePick() {
     document.getElementById(previewId).src = url;
     closeImagePicker();
     return;
+  }
+  if (section === '__wm__') {
+    pendingWmImgUrl = url;
+    document.getElementById('wm-img-url').value = url;
+    const preview = document.getElementById('wm-img-preview');
+    preview.src = url; preview.style.display = 'block';
+    closeImagePicker(); return;
+  }
+  if (section === '__wm_img__') {
+    wmImagesList.push(url);
+    renderWmImages();
+    closeImagePicker(); return;
   }
   if (section === '__bs__') {
     pendingBsImgUrl = url;
@@ -1931,6 +2020,123 @@ async function moveBestSeller(i, dir) {
   const r = await fetch('/api/bestsellers', {method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(bestSellers)});
   if (r.ok) { renderBestSellers(); toast('Reordered'); }
   else toast('Error', 'err');
+}
+
+// ── WORKSHOPS ADMIN ──
+let workshopsData = { previous: [], upcoming: [] };
+let pendingWmImgUrl = '';
+let wmImagesList = [];
+
+async function loadWorkshopsPage() {
+  const r = await fetch('/api/workshops');
+  workshopsData = await r.json();
+  renderWorkshopsList('previous');
+  renderWorkshopsList('upcoming');
+}
+
+function renderWorkshopsList(type) {
+  const el = document.getElementById(type === 'previous' ? 'workshops-prev-list' : 'workshops-new-list');
+  const items = workshopsData[type] || [];
+  if (!items.length) { el.innerHTML = '<p style="color:var(--muted);font-size:0.85em">No workshops yet.</p>'; return; }
+  el.innerHTML = items.map((w, i) => `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:1em 0;border-bottom:1px solid var(--border)">
+      <div>
+        <strong>${w.name}</strong>
+        <div style="font-size:0.82em;color:var(--muted);margin-top:0.2em">${w.date||''}${type==='upcoming'&&w.price?' · AED '+w.price:''}</div>
+      </div>
+      <div style="display:flex;gap:0.5em;flex-shrink:0">
+        <button class="btn btn-sm btn-secondary" onclick="openEditWorkshop('${type}',${i})">Edit</button>
+        <button class="btn btn-sm btn-danger" onclick="deleteWorkshop('${type}',${i})">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+function openAddWorkshop(type) {
+  document.getElementById('wm-type').value = type;
+  document.getElementById('wm-idx').value = -1;
+  document.getElementById('workshop-modal-title').textContent = 'Add Workshop';
+  document.getElementById('wm-name').value = '';
+  document.getElementById('wm-date').value = '';
+  document.getElementById('wm-desc').value = '';
+  wmImagesList = [];
+  renderWmImages();
+  document.getElementById('wm-img-url').value = '';
+  const preview = document.getElementById('wm-img-preview');
+  preview.src = ''; preview.style.display = 'none';
+  if (document.getElementById('wm-price')) document.getElementById('wm-price').value = '';
+  if (document.getElementById('wm-spots')) document.getElementById('wm-spots').value = '';
+  document.getElementById('wm-prev-images-section').style.display = type === 'previous' ? '' : 'none';
+  document.getElementById('wm-new-fields-section').style.display = type === 'upcoming' ? '' : 'none';
+  document.getElementById('workshop-modal').classList.remove('hidden');
+}
+
+function openEditWorkshop(type, idx) {
+  const w = workshopsData[type][idx];
+  document.getElementById('wm-type').value = type;
+  document.getElementById('wm-idx').value = idx;
+  document.getElementById('workshop-modal-title').textContent = 'Edit Workshop';
+  document.getElementById('wm-name').value = w.name || '';
+  document.getElementById('wm-date').value = w.date || '';
+  document.getElementById('wm-desc').value = w.desc || '';
+  wmImagesList = w.images ? [...w.images] : [];
+  renderWmImages();
+  const imgUrl = w.image || '';
+  document.getElementById('wm-img-url').value = imgUrl;
+  const preview = document.getElementById('wm-img-preview');
+  if (imgUrl) { preview.src = imgUrl; preview.style.display = 'block'; } else { preview.src = ''; preview.style.display = 'none'; }
+  if (document.getElementById('wm-price')) document.getElementById('wm-price').value = w.price || '';
+  if (document.getElementById('wm-spots')) document.getElementById('wm-spots').value = w.spots_left || '';
+  document.getElementById('wm-prev-images-section').style.display = type === 'previous' ? '' : 'none';
+  document.getElementById('wm-new-fields-section').style.display = type === 'upcoming' ? '' : 'none';
+  document.getElementById('workshop-modal').classList.remove('hidden');
+}
+
+function closeWorkshopModal() {
+  document.getElementById('workshop-modal').classList.add('hidden');
+}
+
+function wmAddImage() {
+  openImagePicker('__wm_img__', '', null);
+}
+
+function renderWmImages() {
+  const el = document.getElementById('wm-images-list');
+  if (!el) return;
+  el.innerHTML = wmImagesList.map((url, i) => `
+    <div style="position:relative">
+      <img src="${url}" style="width:70px;height:55px;object-fit:cover;border-radius:3px">
+      <button onclick="wmImagesList.splice(${i},1);renderWmImages()" style="position:absolute;top:-4px;right:-4px;background:#c0392b;color:white;border:none;border-radius:50%;width:16px;height:16px;font-size:10px;cursor:pointer;line-height:1;padding:0">✕</button>
+    </div>`).join('');
+}
+
+async function saveWorkshop() {
+  const type = document.getElementById('wm-type').value;
+  const idx = parseInt(document.getElementById('wm-idx').value);
+  const w = {
+    name: document.getElementById('wm-name').value.trim(),
+    date: document.getElementById('wm-date').value.trim(),
+    desc: document.getElementById('wm-desc').value.trim(),
+  };
+  if (!w.name) { alert('Name is required'); return; }
+  if (type === 'previous') {
+    w.images = [...wmImagesList];
+  } else {
+    w.image = document.getElementById('wm-img-url').value;
+    w.price = document.getElementById('wm-price').value;
+    w.spots_left = document.getElementById('wm-spots').value;
+  }
+  if (idx === -1) { workshopsData[type].push(w); }
+  else { workshopsData[type][idx] = w; }
+  await fetch(`/api/workshops/${type}`, { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(workshopsData[type]) });
+  closeWorkshopModal();
+  renderWorkshopsList(type);
+}
+
+async function deleteWorkshop(type, idx) {
+  if (!confirm('Delete this workshop?')) return;
+  await fetch(`/api/workshops/${type}/${idx}`, { method: 'DELETE' });
+  workshopsData[type].splice(idx, 1);
+  renderWorkshopsList(type);
 }
 
 // ── BOOT ──────────────────────────────────────────────────────────────────────

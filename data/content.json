@@ -253,6 +253,10 @@
       "rating": 5
     }
   ],
+  "workshops": {
+    "previous": [],
+    "upcoming": []
+  },
   "bestsellers": [
     {
       "badge": "Best Seller",

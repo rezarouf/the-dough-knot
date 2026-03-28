@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="wa-number" content="971567894758">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Dough Knot — Cakes, Desserts & More</title>
   <link rel="icon" type="image/png" href="/brand_assets/DOUGH%20KNOT%20LOGO%20PNG.png">
@@ -434,7 +435,7 @@
 
     .s-about__heading {
       font-family: 'Playfair Display', serif;
-      font-size: 3.2vw; font-weight: 800; line-height: 1.1;
+      font-size: clamp(2.4rem, 3.2vw, 4rem); font-weight: 800; line-height: 1.1;
       text-transform: uppercase; color: var(--c-cream);
       letter-spacing: -0.02em; margin-bottom: 1.8em;
     }
@@ -712,7 +713,7 @@
     }
     .s-baker__name {
       font-family: 'Playfair Display', serif;
-      font-size: 3.8vw; font-weight: 800; line-height: 1.02;
+      font-size: clamp(2.4rem, 3.2vw, 4rem); font-weight: 800; line-height: 1.02;
       text-transform: uppercase; letter-spacing: -0.025em;
       color: var(--c-cream); margin-bottom: 0.25em;
     }
@@ -734,10 +735,10 @@
 
     /* ── TESTIMONIALS ── */
     .s-testimonials { padding: 0 5vw; }
-    .s-testimonials__hd { text-align: center; margin-bottom: 5vw; }
+    .s-testimonials__hd { text-align: left; margin-bottom: 5vw; }
     .s-testimonials__title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4.2vw, 4.8rem); font-weight: 800; line-height: 1.05;
+      font-size: clamp(2.4rem, 3.2vw, 4rem); font-weight: 800; line-height: 1.05;
       text-transform: uppercase; letter-spacing: -0.025em;
       color: var(--c-cream); margin-top: 0.5em;
     }
@@ -779,18 +780,18 @@
 
     /* ── BEST SELLERS ── */
     .s-bestsellers { padding: 0 5vw; }
-    .s-bestsellers__hd { text-align: center; margin-bottom: 5vw; }
+    .s-bestsellers__hd { text-align: left; margin-bottom: 5vw; }
     .s-bestsellers__label { /* uses .s-label */ }
     .s-bestsellers__title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 4.2vw, 5rem);
+      font-size: clamp(2.4rem, 3.2vw, 4rem);
       font-weight: 800; line-height: 1.05;
       letter-spacing: -0.02em; color: var(--c-cream);
       margin-bottom: 0.5em;
     }
     .s-bestsellers__sub {
       font-size: 0.88em; font-weight: 300; color: var(--c-muted);
-      max-width: 38em; margin: 0 auto; line-height: 1.7;
+      max-width: 38em; line-height: 1.7;
     }
     .s-bestsellers__grid {
       display: grid;
@@ -985,16 +986,16 @@
     /* ── CUSTOM ORDER ── */
     .s-order { padding: 0 5vw; }
 
-    .s-order__hd { text-align: center; margin-bottom: 4em; }
+    .s-order__hd { text-align: left; margin-bottom: 4em; }
     .s-order__heading {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 3.6vw, 4rem); font-weight: 900; line-height: 1.05;
+      font-size: clamp(2.4rem, 3.2vw, 4rem); font-weight: 900; line-height: 1.05;
       text-transform: uppercase; letter-spacing: -0.02em;
       color: var(--c-cream); margin-bottom: 0.6em;
     }
     .s-order__body {
       font-size: 0.9em; font-weight: 300; line-height: 1.8;
-      color: var(--c-muted); max-width: 54ch; margin: 0 auto;
+      color: var(--c-muted); max-width: 54ch;
     }
 
     /* Two option cards */
@@ -1010,7 +1011,7 @@
       transition: border-color 0.4s ease, background 0.4s ease,
                   box-shadow 0.4s ease;
       cursor: pointer; position: relative; overflow: hidden;
-      text-align: left;
+      text-align: left; width: 100%;
     }
     .s-order__opt::before {
       content: ''; position: absolute; inset: 0;
@@ -1367,6 +1368,16 @@
       .s-gallery__grid { grid-template-columns: repeat(2, 1fr); gap: 4px; }
       .s-gallery__item:nth-child(5n+1) { grid-column: span 2; aspect-ratio: 2 / 1; }
       .s-gallery__item::before { font-size: 1.4em; }
+      .s-gallery__item.is-hidden-mobile { display: none; }
+      .s-gallery__more-btn {
+        display: block; width: 100%; margin-top: 1.2em;
+        padding: 1em; background: transparent;
+        border: 1px solid var(--c-gold-dim); color: var(--c-gold);
+        font-size: 0.72em; font-weight: 700; letter-spacing: 0.2em;
+        text-transform: uppercase; cursor: pointer;
+        transition: background 0.25s ease, border-color 0.25s ease;
+      }
+      .s-gallery__more-btn:hover { background: rgba(201,169,110,0.07); border-color: rgba(201,169,110,0.5); }
 
       /* ── TESTIMONIALS ── */
       .s-testimonials { padding: 0 5vw; }
@@ -1414,6 +1425,181 @@
       .c-lightbox__arrow--next { right: 0.5em; }
       .c-lightbox__arrow { width: 38px; height: 38px; font-size: 1.1em; }
     }
+
+    /* ── WORKSHOPS ── */
+    .s-workshops { padding: 0 5vw; }
+    .s-workshops__hd { margin-bottom: 4vw; }
+    .s-workshops__heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 3.2vw, 4rem); font-weight: 800; line-height: 1.1;
+      text-transform: uppercase; color: var(--c-cream);
+      letter-spacing: -0.02em; margin-bottom: 0.5em;
+    }
+    .s-workshops__group { margin-bottom: 4vw; }
+    .s-workshops__group-title {
+      font-size: 0.68em; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--c-gold);
+      margin-bottom: 1.8em; padding-bottom: 0.8em;
+      border-bottom: 1px solid var(--c-gold-dim);
+    }
+    .s-workshops__scroll {
+      display: flex; gap: 1.6em; overflow-x: auto; padding-bottom: 1em;
+      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    }
+    .s-workshops__scroll::-webkit-scrollbar { height: 4px; }
+    .s-workshops__scroll::-webkit-scrollbar-track { background: var(--c-gold-dim); border-radius: 2px; }
+    .s-workshops__scroll::-webkit-scrollbar-thumb { background: var(--c-gold); border-radius: 2px; }
+    .s-wcard {
+      flex: 0 0 320px; scroll-snap-align: start;
+      background: var(--c-surface); border: 1px solid var(--c-gold-dim);
+      border-radius: 4px; overflow: hidden; cursor: pointer;
+      transition: border-color 0.3s ease, transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+      position: relative;
+    }
+    .s-wcard:hover { border-color: rgba(201,169,110,0.45); transform: translateY(-4px); box-shadow: 0 1.5vw 3vw rgba(0,0,0,0.4); }
+    .s-wcard__img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;
+      transition: transform 0.5s var(--ease-out);
+    }
+    .s-wcard:hover .s-wcard__img { transform: scale(1.04); }
+    .s-wcard__img-wrap { overflow: hidden; }
+    .s-wcard__body { padding: 1.6em 1.8em 2em; }
+    .s-wcard__badge {
+      display: inline-block; font-size: 0.55em; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--c-gold); border: 1px solid var(--c-gold-dim);
+      padding: 0.3em 0.7em; margin-bottom: 1em;
+    }
+    .s-wcard__name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15em; font-weight: 700; color: var(--c-cream);
+      line-height: 1.25; margin-bottom: 0.5em;
+    }
+    .s-wcard__date {
+      font-size: 0.7em; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--c-gold); margin-bottom: 0.9em;
+    }
+    .s-wcard__desc {
+      font-size: 0.82em; font-weight: 300; line-height: 1.7;
+      color: var(--c-muted);
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .s-wcard__cta {
+      display: inline-flex; align-items: center; gap: 0.5em;
+      margin-top: 1.2em; font-size: 0.65em; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-gold);
+    }
+    .s-wcard--new .s-wcard__badge { color: var(--c-pink); border-color: rgba(249,178,187,0.3); }
+    .s-wcard--new .s-wcard__cta { color: var(--c-pink); }
+    .s-wcard__spots {
+      font-size: 0.65em; font-weight: 600; color: var(--c-pink);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.4em;
+    }
+    .s-wcard__price {
+      font-size: 0.85em; font-weight: 700; color: var(--c-cream);
+      margin-top: 0.5em;
+    }
+
+    /* Workshop images modal */
+    .c-wimg-modal {
+      position: fixed; inset: 0; z-index: 1200;
+      background: rgba(20,8,3,0.96);
+      display: flex; flex-direction: column;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .c-wimg-modal.is-open { opacity: 1; pointer-events: all; }
+    .c-wimg-modal__header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5em 2em; border-bottom: 1px solid var(--c-gold-dim);
+    }
+    .c-wimg-modal__title {
+      font-family: 'Playfair Display', serif; font-size: 1.1em;
+      font-weight: 700; color: var(--c-cream); text-transform: uppercase;
+    }
+    .c-wimg-modal__close {
+      background: none; border: none; color: var(--c-muted); font-size: 1.5em;
+      cursor: pointer; padding: 0.2em 0.5em;
+      transition: color 0.2s ease;
+    }
+    .c-wimg-modal__close:hover { color: var(--c-cream); }
+    .c-wimg-modal__grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 6px; padding: 1.5em; overflow-y: auto; flex: 1;
+    }
+    .c-wimg-modal__item {
+      aspect-ratio: 1; overflow: hidden; cursor: pointer;
+      border-radius: 3px;
+    }
+    .c-wimg-modal__item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
+    .c-wimg-modal__item:hover img { transform: scale(1.05); }
+
+    /* Workshop register modal */
+    .c-wreg-modal {
+      position: fixed; inset: 0; z-index: 1200;
+      background: rgba(20,8,3,0.92);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 1.5em;
+    }
+    .c-wreg-modal.is-open { opacity: 1; pointer-events: all; }
+    .c-wreg-modal__box {
+      background: var(--c-surface); border: 1px solid var(--c-gold-dim);
+      padding: 3em 3.5em; max-width: 520px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
+      transform: translateY(20px);
+      transition: transform 0.35s var(--ease-out);
+    }
+    .c-wreg-modal.is-open .c-wreg-modal__box { transform: translateY(0); }
+    .c-wreg-modal__workshop-name {
+      font-size: 0.65em; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--c-pink); margin-bottom: 0.5em;
+    }
+    .c-wreg-modal__title {
+      font-family: 'Playfair Display', serif; font-size: 1.6em;
+      font-weight: 800; color: var(--c-cream); text-transform: uppercase;
+      letter-spacing: -0.02em; margin-bottom: 0.3em;
+    }
+    .c-wreg-modal__date {
+      font-size: 0.72em; color: var(--c-gold); font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2em;
+    }
+    .c-wreg-modal__close-btn {
+      position: absolute; top: 1em; right: 1em; background: none; border: none;
+      color: var(--c-muted); font-size: 1.4em; cursor: pointer;
+    }
+    .c-wreg-modal__box { position: relative; }
+    .c-wreg-modal__field { margin-bottom: 1.4em; }
+    .c-wreg-modal__field label {
+      display: block; font-size: 0.65em; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--c-gold); margin-bottom: 0.6em;
+    }
+    .c-wreg-modal__field input,
+    .c-wreg-modal__field textarea {
+      width: 100%; background: var(--c-elevated); border: 1px solid var(--c-gold-dim);
+      padding: 0.9em 1.1em; color: var(--c-cream); font-size: 0.9em;
+      font-family: inherit; outline: none; border-radius: 2px;
+      transition: border-color 0.25s ease;
+    }
+    .c-wreg-modal__field input:focus,
+    .c-wreg-modal__field textarea:focus { border-color: rgba(201,169,110,0.55); }
+    .c-wreg-modal__field textarea { resize: vertical; min-height: 80px; }
+    .c-wreg-modal__submit {
+      width: 100%; padding: 1.1em; background: var(--c-gold);
+      color: var(--c-bg); font-size: 0.72em; font-weight: 800;
+      letter-spacing: 0.22em; text-transform: uppercase; border: none;
+      cursor: pointer; font-family: inherit;
+      transition: opacity 0.25s ease;
+    }
+    .c-wreg-modal__submit:hover { opacity: 0.88; }
+
+    @media (max-width: 640px) {
+      .s-wcard { flex: 0 0 76vw; }
+      .c-wimg-modal__grid { grid-template-columns: repeat(2, 1fr); }
+      .c-wreg-modal__box { padding: 2em 1.8em; }
+    }
   </style>
 </head>
 <body>
@@ -1434,6 +1620,7 @@
     <ul class="c-nav__links">
       <li><a href="#about">Our Story</a></li>
       <li><a href="#bestsellers">Best Sellers</a></li>
+              <li><a href="#workshops">Workshops</a></li>
       <li><a href="#menu">Menu</a></li>
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#custom">Order a Cake</a></li>
@@ -1458,6 +1645,7 @@
   <div class="c-nav__drawer" id="c-nav-drawer">
     <a href="#about"       onclick="closeMobileMenu()">Our Story</a>
     <a href="#bestsellers" onclick="closeMobileMenu()">Best Sellers</a>
+    <a href="#workshops"   onclick="closeMobileMenu()">Workshops</a>
     <a href="#menu"        onclick="closeMobileMenu()">Menu</a>
     <a href="#gallery"     onclick="closeMobileMenu()">Gallery</a>
     <a href="#custom"      onclick="closeMobileMenu()">Order a Cake</a>
@@ -1507,7 +1695,7 @@
         <span class="word-wrap"><span class="word" style="animation-delay:0.05s">Made to</span></span><br>
         <em><span class="word-wrap"><span class="word" style="animation-delay:0.18s">Order,</span></span></em><br>
         <span class="word-wrap"><span class="word" style="animation-delay:0.30s">Baked</span></span><br>
-        <span class="word-wrap"><span class="word" style="animation-delay:0.42s">with Love.</span></span>
+        <span class="word-wrap"><span class="word" style="animation-delay:0.42s">with </span></span><em><span class="word-wrap"><span class="word" style="animation-delay:0.48s">Love.</span></span></em>
       </h1>
       <p class="o-hero__body">
         Every bite handcrafted with love — from showstopping celebration cakes to the perfect everyday indulgence.
@@ -1825,11 +2013,63 @@
   <!-- ══ TESTIMONIALS ══ -->
   <section class="o-home_section s-testimonials" id="testimonials">
     <div class="s-testimonials__hd" data-animate="fade">
-      <p class="s-label" style="text-align:center">Happy Customers</p>
+      <p class="s-label">Happy Customers</p>
       <h2 class="s-testimonials__title">What They're<br><em style="color:var(--c-pink);font-style:italic">Saying</em></h2>
     </div>
     <div class="s-testimonials__grid" id="testimonials-grid"></div>
   </section>
+
+  <!-- ══ WORKSHOPS ══ -->
+  <section class="o-home_section s-workshops" id="workshops">
+    <div class="s-workshops__hd" data-animate="fade">
+      <p class="s-label">Baking Classes</p>
+      <h2 class="s-workshops__heading">Workshops</h2>
+    </div>
+    <div class="s-workshops__group" id="workshops-prev-group">
+      <p class="s-workshops__group-title">Previous Workshops</p>
+      <div class="s-workshops__scroll" id="workshops-prev-scroll"></div>
+    </div>
+    <div class="s-workshops__group" id="workshops-new-group">
+      <p class="s-workshops__group-title">Upcoming Workshops</p>
+      <div class="s-workshops__scroll" id="workshops-new-scroll"></div>
+    </div>
+  </section>
+
+  <!-- Workshop images modal -->
+  <div class="c-wimg-modal" id="wimg-modal" onclick="if(event.target===this)closeWimgModal()">
+    <div class="c-wimg-modal__header">
+      <p class="c-wimg-modal__title" id="wimg-modal-title"></p>
+      <button class="c-wimg-modal__close" onclick="closeWimgModal()">✕</button>
+    </div>
+    <div class="c-wimg-modal__grid" id="wimg-modal-grid"></div>
+  </div>
+
+  <!-- Workshop register modal -->
+  <div class="c-wreg-modal" id="wreg-modal" onclick="if(event.target===this)closeWregModal()">
+    <div class="c-wreg-modal__box">
+      <button class="c-wreg-modal__close-btn" onclick="closeWregModal()">✕</button>
+      <p class="c-wreg-modal__workshop-name" id="wreg-workshop-name"></p>
+      <h2 class="c-wreg-modal__title">Register</h2>
+      <p class="c-wreg-modal__date" id="wreg-workshop-date"></p>
+      <div class="c-wreg-modal__field">
+        <label for="wreg-name">Your Name</label>
+        <input type="text" id="wreg-name" placeholder="Full name">
+      </div>
+      <div class="c-wreg-modal__field">
+        <label for="wreg-phone">WhatsApp Number</label>
+        <input type="tel" id="wreg-phone" placeholder="+971 XX XXX XXXX">
+      </div>
+      <div class="c-wreg-modal__field">
+        <label for="wreg-email">Email (optional)</label>
+        <input type="email" id="wreg-email" placeholder="your@email.com">
+      </div>
+      <div class="c-wreg-modal__field">
+        <label for="wreg-notes">Any Questions?</label>
+        <textarea id="wreg-notes" placeholder="Questions or special requirements…"></textarea>
+      </div>
+      <button class="c-wreg-modal__submit" onclick="submitWregForm()">Send via WhatsApp</button>
+    </div>
+  </div>
 
   <!-- ══ CUSTOM ORDER ══ -->
   <section class="o-home_section s-order" id="custom">
@@ -1937,6 +2177,7 @@
         <div class="o-footer__links">
           <a href="#about">Our Story</a>
           <a href="#bestsellers">Best Sellers</a>
+          <a href="#workshops">Workshops</a>
           <a href="#menu">Menu</a>
           <a href="#gallery">Gallery</a>
           <a href="#custom">Order a Cake</a>
@@ -2072,6 +2313,52 @@
       if (e.key === 'ArrowRight')  lightboxNav(1);
       if (e.key === 'ArrowLeft')   lightboxNav(-1);
     });
+
+    /* ── WORKSHOP MODALS ── */
+    function openWimgModal(name, images) {
+      document.getElementById('wimg-modal-title').textContent = name;
+      document.getElementById('wimg-modal-grid').innerHTML = images.map((url, i) =>
+        `<div class="c-wimg-modal__item" onclick="openLightbox_w(${i})" data-url="${url}">
+          <img src="${url}" alt="${name}" loading="lazy">
+        </div>`).join('');
+      _wimgImages = images;
+      document.getElementById('wimg-modal').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeWimgModal() {
+      document.getElementById('wimg-modal').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+    let _wimgImages = [];
+    function openLightbox_w(idx) {
+      galleryImages = _wimgImages;
+      openLightbox(idx);
+    }
+
+    let _wregName = '', _wregDate = '';
+    function openWregModal(name, date) {
+      _wregName = name; _wregDate = date;
+      document.getElementById('wreg-workshop-name').textContent = name;
+      document.getElementById('wreg-workshop-date').textContent = date;
+      ['wreg-name','wreg-phone','wreg-email','wreg-notes'].forEach(id => { document.getElementById(id).value = ''; });
+      document.getElementById('wreg-modal').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeWregModal() {
+      document.getElementById('wreg-modal').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+    function submitWregForm() {
+      const name = document.getElementById('wreg-name').value.trim();
+      const phone = document.getElementById('wreg-phone').value.trim();
+      const email = document.getElementById('wreg-email').value.trim();
+      const notes = document.getElementById('wreg-notes').value.trim();
+      if (!name || !phone) { alert('Please enter your name and WhatsApp number.'); return; }
+      const msg = `Hi! I'd like to register for the *${_wregName}* workshop (${_wregDate}).\n\nName: ${name}\nWhatsApp: ${phone}${email ? '\nEmail: '+email : ''}${notes ? '\nNotes: '+notes : ''}`;
+      const waNum = document.querySelector('meta[name="wa-number"]')?.content || '971567894758';
+      window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
+      closeWregModal();
+    }
 
     /* Hero slider */
     const heroSlider = (function() {
@@ -2214,9 +2501,21 @@
           const grid = document.getElementById('gallery-grid');
           if (grid) {
             galleryImages = c.gallery.images;
+            const isMobileGallery = window.matchMedia('(max-width: 640px)').matches;
+            const MOBILE_LIMIT = 8;
             grid.innerHTML = galleryImages
-              .map((url, i) => `<div class="s-gallery__item" onclick="openLightbox(${i})"><img src="${url}" alt="Gallery photo" loading="lazy"></div>`)
+              .map((url, i) => `<div class="s-gallery__item${isMobileGallery && i >= MOBILE_LIMIT ? ' is-hidden-mobile' : ''}" onclick="openLightbox(${i})"><img src="${url}" alt="Gallery photo" loading="lazy"></div>`)
               .join('');
+            if (isMobileGallery && galleryImages.length > MOBILE_LIMIT) {
+              const btn = document.createElement('button');
+              btn.className = 's-gallery__more-btn';
+              btn.textContent = 'See More';
+              btn.onclick = function() {
+                grid.querySelectorAll('.is-hidden-mobile').forEach(el => el.classList.remove('is-hidden-mobile'));
+                btn.remove();
+              };
+              grid.after(btn);
+            }
             if (document.body.classList.contains('is-animated')) {
               grid.querySelectorAll('.s-gallery__item').forEach((el, i) => {
                 el.dataset.delay = i * 40;
@@ -2296,6 +2595,48 @@
               });
             }
           }
+        }
+
+        // Workshops
+        if (c.workshops) {
+          const prevScroll = document.getElementById('workshops-prev-scroll');
+          const newScroll = document.getElementById('workshops-new-scroll');
+          const prevGroup = document.getElementById('workshops-prev-group');
+          const newGroup = document.getElementById('workshops-new-group');
+
+          if (prevScroll && c.workshops.previous && c.workshops.previous.length) {
+            prevScroll.innerHTML = c.workshops.previous.map(w => `
+              <div class="s-wcard" onclick='openWimgModal(${JSON.stringify(w.name)}, ${JSON.stringify(w.images||[])})'>
+                <div class="s-wcard__img-wrap">
+                  <img class="s-wcard__img" src="${(w.images&&w.images[0])||'/brand_assets/uploads/placeholder.jpg'}" alt="${w.name}" loading="lazy">
+                </div>
+                <div class="s-wcard__body">
+                  <span class="s-wcard__badge">Past Workshop</span>
+                  <p class="s-wcard__name">${w.name}</p>
+                  <p class="s-wcard__date">${w.date||''}</p>
+                  <p class="s-wcard__desc">${w.desc||''}</p>
+                  <span class="s-wcard__cta">View Photos →</span>
+                </div>
+              </div>`).join('');
+          } else if (prevGroup) { prevGroup.style.display = 'none'; }
+
+          if (newScroll && c.workshops.upcoming && c.workshops.upcoming.length) {
+            newScroll.innerHTML = c.workshops.upcoming.map(w => `
+              <div class="s-wcard s-wcard--new" onclick='openWregModal(${JSON.stringify(w.name)}, ${JSON.stringify(w.date||'')})'>
+                <div class="s-wcard__img-wrap">
+                  <img class="s-wcard__img" src="${w.image||'/brand_assets/uploads/placeholder.jpg'}" alt="${w.name}" loading="lazy">
+                </div>
+                <div class="s-wcard__body">
+                  <span class="s-wcard__badge">Upcoming</span>
+                  <p class="s-wcard__name">${w.name}</p>
+                  <p class="s-wcard__date">${w.date||''}</p>
+                  <p class="s-wcard__desc">${w.desc||''}</p>
+                  ${w.price ? `<p class="s-wcard__price">AED ${w.price}</p>` : ''}
+                  ${w.spots_left ? `<p class="s-wcard__spots">${w.spots_left} spots left</p>` : ''}
+                  <span class="s-wcard__cta">Register Now →</span>
+                </div>
+              </div>`).join('');
+          } else if (newGroup) { newGroup.style.display = 'none'; }
         }
 
         // Contact links
