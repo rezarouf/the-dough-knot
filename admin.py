@@ -557,4 +557,5 @@ if __name__ == '__main__':
     print('  Main site : http://localhost:3000')
     print('  Admin     : http://localhost:3000/admin')
     print(f'  Password  : {ADMIN_PASSWORD}\n')
-    app.run(host='0.0.0.0', port=3000, debug=False)
+    port = int(os.environ.get('PORT', 3000))
+    app.run(host='0.0.0.0', port=port, debug=False)
