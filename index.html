@@ -1,0 +1,2493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Dough Knot — Cakes, Desserts & More</title>
+  <link rel="icon" type="image/png" href="/brand_assets/DOUGH%20KNOT%20LOGO%20PNG.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,700&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,900&display=swap" rel="stylesheet">
+  <style>
+    /* ── ROOT TOKENS ── */
+    :root {
+      --c-bg:         #2a1208;
+      --c-surface:    #351709;
+      --c-elevated:   #411e0b;
+      --c-text:       #e8d4c0;
+      --c-muted:      rgba(232,212,192,0.55);
+      --c-gold:       #c9a96e;
+      --c-gold-dim:   rgba(201,169,110,0.22);
+      --c-pink:       #f9b2bb;
+      --c-chocolate:  #492816;
+      --c-cream:      #f0dfc0;
+      --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out:     cubic-bezier(0.22, 1, 0.36, 1);
+      background-color: var(--c-bg);
+      font-size: 62.5%;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      background-repeat: no-repeat;
+      margin: 0; padding: 0;
+    }
+
+    body {
+      background-color: var(--c-bg);
+      color: var(--c-text);
+      display: flex;
+      flex-direction: column;
+      font-family: 'Montserrat', -apple-system, system-ui, sans-serif;
+      font-size: 3.73333vw;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.4;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    @media only screen and (min-width: 56.25em) {
+      body { font-size: 1vw; }
+    }
+
+    ::selection { background-color: #856b39; color: #fff; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+
+    /* ── SECTION RHYTHM ── */
+    .o-home_section { margin: 3.5vw 0; position: relative; }
+    .o-hero { margin-top: 0; }
+
+    /* ── GRAIN TEXTURE ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 999; opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ══════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════ */
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes slideLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scaleUp {
+      from { opacity: 0; transform: scale(0.9); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes pinkPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(249,178,187,0); }
+      50%       { box-shadow: 0 0 0 6px rgba(249,178,187,0.12); }
+    }
+
+    /* Scroll-triggered — only active when JS initialises (.is-animated on body) */
+    .is-animated [data-animate] {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out);
+    }
+    .is-animated [data-animate="left"]  { transform: translateX(-36px); }
+    .is-animated [data-animate="right"] { transform: translateX(36px); }
+    .is-animated [data-animate="scale"] { transform: scale(0.93); opacity: 0; }
+    .is-animated [data-animate="fade"]  { opacity: 0; transform: none; }
+    .is-animated [data-animate].is-visible { opacity: 1; transform: translate(0) scale(1); }
+
+    /* Hero word-by-word entrance */
+    .word-wrap { overflow: hidden; display: inline-block; }
+    .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    .hero-loaded .word {
+      animation: fadeUp 0.9s var(--ease-out) forwards;
+    }
+    .hero-loaded .o-hero__eyebrow { animation: fadeIn 0.7s 0.1s ease both; }
+    .hero-loaded .o-hero__body    { animation: fadeUp 0.7s 0.8s var(--ease-out) both; }
+    .hero-loaded .o-hero__cta     { animation: scaleUp 0.6s 1s var(--ease-spring) both; }
+
+    /* ── NAV ── */
+    /* ── STANDALONE LOGO — centered, above nav ── */
+    .c-logo {
+      position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+      z-index: 320; display: block;
+      transition: transform 0.45s var(--ease-out), opacity 0.35s ease;
+    }
+    .c-logo.is-hidden {
+      transform: translateX(-50%) translateY(-110%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .c-logo img {
+      height: 7em; width: auto;
+      transition: transform 0.35s var(--ease-out);
+      filter: drop-shadow(0 2px 12px rgba(0,0,0,0.4));
+    }
+    .c-logo:hover img { transform: scale(1.04) rotate(-1deg); }
+
+    /* ── NAV — sits below logo, 3-col grid ── */
+    .c-nav {
+      position: fixed; top: 7em; left: 0; right: 0; z-index: 300;
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0.6em 2.5em;
+      background: rgba(30,10,4,0.18);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      transition: background 0.5s ease, backdrop-filter 0.5s ease, top 0.45s var(--ease-out);
+    }
+    .c-nav.is-scrolled {
+      top: 0;
+      background: rgba(30,10,4,0.72);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+    }
+
+    /* Hamburger — hidden on desktop */
+    .c-nav__burger {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      width: 36px; height: 36px; background: none; border: none; padding: 4px;
+      position: relative; z-index: 310; justify-self: end;
+    }
+    .c-nav__burger span {
+      display: block; height: 2px; width: 100%;
+      background: var(--c-cream); border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+    .c-nav__burger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .c-nav__burger.is-open span:nth-child(2) { opacity: 0; }
+    .c-nav__burger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    .c-nav__drawer {
+      display: none; position: fixed; inset: 0; z-index: 260;
+      background: rgba(26,9,3,0.97); backdrop-filter: blur(16px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 2.5em;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .c-nav__drawer.is-open { opacity: 1; pointer-events: auto; }
+    .c-nav__drawer a {
+      font-size: 1.5em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--c-cream); opacity: 0.75;
+      transition: opacity 0.2s ease, color 0.2s ease;
+    }
+    .c-nav__drawer a:hover { opacity: 1; color: var(--c-gold); }
+    .c-nav__drawer .drawer-social {
+      display: flex; gap: 2em; margin-top: 1em;
+      font-size: 0.8em; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--c-gold);
+    }
+
+    .c-nav__links {
+      grid-column: 2;
+      display: flex; gap: 2.6em; justify-content: center;
+      font-size: 0.7em; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      list-style: none;
+    }
+    .c-nav__links a {
+      opacity: 0.82; color: var(--c-cream);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+      transition: opacity 0.25s ease, color 0.25s ease;
+      position: relative;
+    }
+    .c-nav__links a::after {
+      content: '';
+      position: absolute; bottom: -3px; left: 0; right: 0; height: 1px;
+      background: var(--c-gold); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s var(--ease-out);
+    }
+    .c-nav__links a:hover,
+    .c-nav__links a.is-active { opacity: 1; color: var(--c-gold); }
+    .c-nav__links a:hover::after,
+    .c-nav__links a.is-active::after { transform: scaleX(1); }
+
+    .c-nav__social {
+      grid-column: 3;
+      display: flex; gap: 1.1em; justify-content: flex-end; align-items: center;
+    }
+    .c-nav__social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.22);
+      color: var(--c-cream); opacity: 0.75;
+      transition: opacity 0.25s ease, border-color 0.25s ease,
+                  background 0.25s ease, transform 0.25s var(--ease-spring);
+    }
+    .c-nav__social a:hover {
+      opacity: 1; border-color: var(--c-gold);
+      background: rgba(201,169,110,0.12); color: var(--c-gold);
+      transform: scale(1.1);
+    }
+    .c-nav__social svg { width: 14px; height: 14px; }
+
+    /* ── HERO ── */
+    .o-hero {
+      min-height: 100vh; position: relative; overflow: hidden;
+      display: flex; align-items: flex-start;
+      padding-top: 10em; padding-bottom: 6vw; padding-left: 5vw;
+    }
+
+    /* ── HERO SLIDER ── */
+    .o-hero__slider {
+      position: absolute; top: -10%; right: 0;
+      width: 68%; height: 120%;
+      overflow: hidden;
+      will-change: transform;
+    }
+
+    .o-hero__slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .o-hero__slide.is-active { opacity: 1; }
+
+    @keyframes kenBurns {
+      from { transform: scale(1)   translate(0, 0); }
+      to   { transform: scale(1.1) translate(-1%, -1%); }
+    }
+    @keyframes kenBurns2 {
+      from { transform: scale(1)   translate(0, 0); }
+      to   { transform: scale(1.1) translate(1%, -0.5%); }
+    }
+    @keyframes kenBurns3 {
+      from { transform: scale(1.05) translate(1%, 0); }
+      to   { transform: scale(1)    translate(-0.5%, -1%); }
+    }
+
+    .o-hero__slide img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+    }
+    .o-hero__slide.is-active img  { animation: kenBurns 8s ease forwards; }
+    .o-hero__slide.is-active:nth-child(2) img { animation-name: kenBurns2; }
+    .o-hero__slide.is-active:nth-child(3) img { animation-name: kenBurns3; }
+    .o-hero__slide.is-active:nth-child(4) img { animation-name: kenBurns2; }
+
+    /* Progress bar */
+    .o-hero__progress {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px; z-index: 5;
+      background: rgba(255,255,255,0.08);
+    }
+    .o-hero__progress-bar {
+      height: 100%; width: 0%;
+      background: linear-gradient(to right, var(--c-gold), var(--c-pink));
+      transition: none;
+    }
+    .o-hero__progress-bar.is-running {
+      transition: width linear;
+    }
+
+    /* Slide dots */
+    .o-hero__dots {
+      position: absolute; bottom: 3.5vw; right: 5vw;
+      display: flex; align-items: center; gap: 0.5em;
+      z-index: 10;
+    }
+    .o-hero__dot {
+      height: 5px; width: 5px; border-radius: 99px;
+      background: rgba(255,255,255,0.3);
+      border: none; padding: 0; cursor: pointer;
+      transition: width 0.4s var(--ease-out), background 0.35s ease;
+    }
+    .o-hero__dot.is-active {
+      width: 22px;
+      background: var(--c-gold);
+    }
+    .o-hero__dot:hover:not(.is-active) { background: rgba(255,255,255,0.55); }
+
+    /* Prev / Next arrows */
+    .o-hero__arrow {
+      position: absolute; top: 50%; z-index: 10;
+      transform: translateY(-50%);
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(42,18,8,0.5);
+      border: 1px solid rgba(201,169,110,0.3);
+      color: var(--c-cream); display: flex; align-items: center; justify-content: center;
+      cursor: pointer; opacity: 0;
+      transition: opacity 0.3s ease, background 0.3s ease, border-color 0.3s ease, transform 0.3s var(--ease-spring);
+    }
+    .o-hero:hover .o-hero__arrow { opacity: 1; }
+    .o-hero__arrow:hover { background: rgba(201,169,110,0.2); border-color: var(--c-gold); transform: translateY(-50%) scale(1.1); }
+    .o-hero__arrow--prev { right: calc(68% + 1.5vw); }
+    .o-hero__arrow--next { right: 1.5vw; }
+    .o-hero__arrow svg { width: 16px; height: 16px; }
+
+    .o-hero__fade {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right, var(--c-bg) 18%, rgba(42,18,8,0.65) 52%, rgba(42,18,8,0.12) 100%),
+        linear-gradient(to top, rgba(42,18,8,0.8) 0%, transparent 45%),
+        linear-gradient(to bottom, rgba(42,18,8,0.4) 0%, transparent 25%);
+    }
+
+    /* color treatment layer */
+    .o-hero__tint {
+      position: absolute; top: 0; right: 0; width: 68%; height: 100%;
+      background: rgba(73,40,22,0.18);
+      mix-blend-mode: multiply;
+    }
+
+    .o-hero__content { position: relative; z-index: 2; max-width: 56vw; }
+
+    .o-hero__eyebrow {
+      position: absolute; bottom: 2.5vw; right: 5vw;
+      font-size: 0.65em; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--c-pink);
+      opacity: 0;
+    }
+
+    .o-hero__title {
+      font-family: 'Playfair Display', 'Montserrat', serif;
+      font-size: 6vw; font-weight: 900; line-height: 0.95;
+      text-transform: uppercase; letter-spacing: -0.02em;
+      color: var(--c-cream);
+    }
+
+    .o-hero__title em {
+      font-style: italic; font-weight: 700; color: var(--c-gold);
+    }
+
+    .o-hero__amp {
+      display: block; font-size: 4.5vw;
+      font-family: 'Playfair Display', serif;
+      color: var(--c-pink); font-style: italic;
+      font-weight: 700; line-height: 1.15;
+    }
+
+    .o-hero__body {
+      margin-top: 2.2em; font-size: 0.88em; font-weight: 300;
+      max-width: 30em; opacity: 0; line-height: 1.78;
+    }
+
+    .o-hero__cta {
+      display: inline-block; margin-top: 2.8em;
+      padding: 1.1em 3em;
+      border: 1px solid rgba(201,169,110,0.7);
+      color: var(--c-gold); font-size: 0.72em; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; opacity: 0;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s var(--ease-spring);
+    }
+    .o-hero__cta:hover {
+      background: var(--c-gold); color: var(--c-bg);
+      border-color: var(--c-gold); transform: scale(1.03);
+    }
+    .o-hero__cta:active { transform: scale(0.98); }
+
+    /* ── ABOUT / HOURS ── */
+    .s-about {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6vw; padding: 0 5vw; align-items: center;
+    }
+
+    .s-about__photos { position: relative; height: 44vw; }
+
+    .s-about__ph1 {
+      position: absolute; top: 0; left: 0; width: 68%;
+      aspect-ratio: 4/3; object-fit: cover;
+      box-shadow: 0 2vw 4vw rgba(0,0,0,0.6), 0 0.5vw 1vw rgba(0,0,0,0.4);
+      transition: transform 0.6s var(--ease-out);
+    }
+    .s-about__ph1:hover { transform: scale(1.02); }
+
+    .s-about__ph2 {
+      position: absolute; bottom: 0; right: 0; width: 52%;
+      aspect-ratio: 3/4; object-fit: cover;
+      outline: 0.5vw solid var(--c-bg);
+      box-shadow: 0 2vw 4vw rgba(0,0,0,0.7);
+      transition: transform 0.6s var(--ease-out);
+    }
+    .s-about__ph2:hover { transform: scale(1.02); }
+
+    /* overlay treatment on photos */
+    .s-about__photos::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(135deg, rgba(73,40,22,0.15) 0%, transparent 60%);
+    }
+
+    .s-label {
+      font-size: 0.68em; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--c-pink); margin-bottom: 1.4em;
+    }
+
+    .s-about__heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2vw; font-weight: 800; line-height: 1.1;
+      text-transform: uppercase; color: var(--c-cream);
+      letter-spacing: -0.02em; margin-bottom: 1.8em;
+    }
+
+    .s-about__body {
+      font-size: 0.9em; font-weight: 300; line-height: 1.8;
+      color: var(--c-muted); margin-bottom: 2.8em;
+    }
+
+    .s-hours { border-top: 1px solid var(--c-gold-dim); padding-top: 2em; }
+
+    .s-hours__label {
+      font-size: 0.68em; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--c-gold); margin-bottom: 1.1em;
+    }
+
+    .s-hours__row {
+      display: flex; justify-content: space-between;
+      font-size: 0.85em; font-weight: 400; padding: 0.5em 0;
+      color: var(--c-muted); border-bottom: 1px solid rgba(255,255,255,0.055);
+    }
+    .s-hours__row:last-child { border-bottom: none; }
+
+    /* ── MENU ── */
+    .s-menu { padding: 0 5vw; }
+
+    .s-menu__hd {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      padding-bottom: 4vw; border-bottom: 1px solid var(--c-gold-dim);
+    }
+
+    .s-menu__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 9vw; font-weight: 900; text-transform: uppercase;
+      letter-spacing: -0.03em; color: var(--c-cream); line-height: 1;
+    }
+
+    .s-menu__note {
+      font-size: 0.82em; font-weight: 300; color: var(--c-muted);
+      max-width: 22em; text-align: right; line-height: 1.65;
+    }
+
+    .s-menu__cat {
+      font-size: 0.68em; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--c-pink);
+      padding-top: 3.5em; margin-bottom: 0.5em;
+    }
+
+    .s-menu__item {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 1.4em 1em; margin: 0 -1em;
+      border-bottom: 1px solid rgba(255,255,255,0.055);
+      border-radius: 4px;
+      transition: background 0.25s ease;
+    }
+    .s-menu__item:hover { background: rgba(201,169,110,0.05); }
+
+    .s-menu__name {
+      font-size: 1em; font-weight: 500; color: var(--c-cream);
+    }
+
+    .s-menu__desc {
+      font-size: 0.8em; font-weight: 300; color: var(--c-muted);
+      margin-top: 0.35em; max-width: 38em;
+    }
+
+    .s-menu__price {
+      font-size: 0.9em; font-weight: 600; color: var(--c-gold);
+      white-space: nowrap; margin-left: 2.5em; flex-shrink: 0;
+    }
+
+    /* ── FULL-BLEED ── */
+    .o-fullbleed {
+      width: 100%; height: 42vw; overflow: hidden; position: relative;
+    }
+    .o-fullbleed img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 8s ease;
+    }
+    .o-fullbleed:hover img { transform: scale(1.04); }
+    .o-fullbleed__shade {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(42,18,8,0.55) 0%, transparent 30%, transparent 65%, rgba(42,18,8,0.75) 100%);
+    }
+    .o-fullbleed__tint {
+      position: absolute; inset: 0;
+      background: rgba(73,40,22,0.2);
+      mix-blend-mode: multiply;
+    }
+
+    /* ── GALLERY ── */
+    .s-gallery { padding: 0 5vw; }
+
+    .s-gallery__header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2vw;
+    }
+    .s-gallery__viewall {
+      font-size: 0.75em; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--c-gold); opacity: 0.7;
+      transition: opacity 0.25s ease, transform 0.25s var(--ease-spring);
+    }
+    .s-gallery__viewall:hover { opacity: 1; transform: translateX(3px); }
+
+    .s-gallery__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .s-gallery__item {
+      overflow: hidden; position: relative;
+      aspect-ratio: 1; cursor: pointer;
+      border-radius: 4px;
+    }
+    /* Every 5th item spans 2 columns (landscape rectangle) */
+    .s-gallery__item:nth-child(5n+1) { grid-column: span 2; aspect-ratio: 2 / 1; }
+
+    .s-gallery__item img {
+      width: 100%; height: 100%; display: block;
+      object-fit: cover; object-position: center;
+      transition: transform 0.65s var(--ease-out);
+    }
+    .s-gallery__item::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(42,18,8,0.6) 100%);
+      opacity: 0; transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .s-gallery__item::before {
+      content: '⊕'; position: absolute; inset: 0; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2em; color: rgba(255,255,255,0.9);
+      opacity: 0; transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .s-gallery__item:hover::after { opacity: 1; }
+    .s-gallery__item:hover::before { opacity: 1; }
+    .s-gallery__item:hover img { transform: scale(1.07); }
+
+    /* ── LIGHTBOX ── */
+    .c-lightbox {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(18,6,2,0.96);
+      backdrop-filter: blur(12px);
+      display: none; align-items: center; justify-content: center;
+    }
+    .c-lightbox.is-open { display: flex; }
+    .c-lightbox__img-wrap {
+      position: relative; max-width: 88vw; max-height: 88vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .c-lightbox__img {
+      max-width: 88vw; max-height: 88vh;
+      object-fit: contain; border-radius: 6px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+      display: block;
+      transition: opacity 0.15s ease;
+    }
+    .c-lightbox__close {
+      position: fixed; top: 1.4em; right: 1.6em;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
+      color: #fff; font-size: 1.2em; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .c-lightbox__close:hover { background: rgba(255,255,255,0.2); transform: scale(1.1) rotate(90deg); }
+    .c-lightbox__arrow {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 46px; height: 46px; border-radius: 50%;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.16);
+      color: #fff; font-size: 1.3em;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.2s ease, transform 0.25s var(--ease-spring);
+    }
+    .c-lightbox__arrow:hover { background: rgba(201,169,110,0.25); border-color: var(--c-gold); transform: translateY(-50%) scale(1.1); }
+    .c-lightbox__arrow--prev { left: 1.6em; }
+    .c-lightbox__arrow--next { right: 1.6em; }
+    .c-lightbox__counter {
+      position: fixed; bottom: 1.6em; left: 50%; transform: translateX(-50%);
+      font-size: 0.72em; font-weight: 600; letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.45); text-transform: uppercase;
+    }
+
+    /* ── LOCATION ── */
+    .s-loc { position: relative; }
+
+    .s-loc__map {
+      width: 100%; height: 48vw; overflow: hidden;
+      background: #2a1208; position: relative;
+    }
+    .s-loc__map::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(42,18,8,0.3);
+      pointer-events: none; z-index: 1;
+    }
+    .s-loc__map iframe {
+      width: 100%; height: 100%; border: none;
+      filter: grayscale(80%) brightness(0.55) contrast(1.1);
+    }
+
+    .s-loc__card {
+      position: absolute; top: 50%; left: 5vw;
+      transform: translateY(-50%); z-index: 2;
+      background: rgba(42,18,8,0.94);
+      border: 1px solid var(--c-gold-dim);
+      padding: 3.2em 3.8em; min-width: 28vw;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 2vw 5vw rgba(0,0,0,0.5),
+                  inset 0 0 0 1px rgba(201,169,110,0.06);
+    }
+
+    .s-loc__business-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2em; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--c-gold); margin-bottom: 2em;
+    }
+
+    .s-loc__lbl {
+      font-size: 0.65em; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--c-pink); margin-bottom: 0.4em;
+    }
+
+    .s-loc__val {
+      font-size: 0.85em; font-weight: 300; color: var(--c-muted);
+      line-height: 1.65; margin-bottom: 1.8em;
+    }
+
+    .s-loc__btn {
+      display: inline-block; margin-top: 0.5em; padding: 0.9em 2.2em;
+      border: 1px solid rgba(201,169,110,0.55);
+      color: var(--c-gold); font-size: 0.68em; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.3s var(--ease-spring);
+    }
+    .s-loc__btn:hover { background: var(--c-gold); color: var(--c-bg); transform: scale(1.03); }
+    .s-loc__btn:active { transform: scale(0.97); }
+
+    /* ── BAKER / FOUNDER ── */
+    .s-baker { padding: 0 5vw; }
+    .s-baker__inner {
+      display: grid; grid-template-columns: 1fr 1.3fr;
+      gap: 7vw; align-items: center;
+    }
+    .s-baker__card {
+      background: var(--c-surface);
+      border: 1px solid var(--c-gold-dim);
+      padding: 3.5em 3.8em;
+      position: relative; overflow: hidden;
+    }
+    .s-baker__card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 35% 25%, rgba(201,169,110,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .s-baker__lavonne {
+      display: block; height: 3.4em; width: auto;
+      margin-bottom: 2.8em;
+      filter: brightness(0) invert(1) opacity(0.85);
+    }
+    .s-baker__cred {
+      display: flex; align-items: flex-start; gap: 1.1em;
+      padding: 1.1em 0;
+      border-bottom: 1px solid rgba(255,255,255,0.055);
+      font-size: 0.84em; font-weight: 300; color: var(--c-muted); line-height: 1.6;
+    }
+    .s-baker__cred:last-child { border-bottom: none; }
+    .s-baker__cred-icon {
+      width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%;
+      background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.25);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--c-gold); font-size: 0.9em; margin-top: 0.05em;
+    }
+    .s-baker__name {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8vw; font-weight: 800; line-height: 1.02;
+      text-transform: uppercase; letter-spacing: -0.025em;
+      color: var(--c-cream); margin-bottom: 0.25em;
+    }
+    .s-baker__founder-title {
+      font-size: 0.68em; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--c-gold); margin-bottom: 1.8em;
+    }
+    .s-baker__bio {
+      font-size: 0.88em; font-weight: 300; line-height: 1.85;
+      color: var(--c-muted); margin-bottom: 2.2em;
+    }
+    .s-baker__badge {
+      display: inline-flex; align-items: center; gap: 0.6em;
+      padding: 0.8em 1.6em;
+      border: 1px solid var(--c-gold-dim);
+      color: var(--c-gold); font-size: 0.65em; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .s-testimonials { padding: 0 5vw; }
+    .s-testimonials__hd { text-align: center; margin-bottom: 5vw; }
+    .s-testimonials__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4.2vw, 4.8rem); font-weight: 800; line-height: 1.05;
+      text-transform: uppercase; letter-spacing: -0.025em;
+      color: var(--c-cream); margin-top: 0.5em;
+    }
+    .s-testimonials__grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.2vw;
+    }
+    .s-tcard {
+      background: var(--c-surface);
+      border: 1px solid var(--c-gold-dim);
+      padding: 2.8em 3em; position: relative; overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s var(--ease-out);
+    }
+    .s-tcard:hover {
+      border-color: rgba(201,169,110,0.45);
+      transform: translateY(-4px);
+      box-shadow: 0 1.5vw 3vw rgba(0,0,0,0.4);
+    }
+    .s-tcard--img { padding: 0; }
+    .s-tcard--img img { width: 100%; display: block; }
+    .s-tcard__quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8em; line-height: 0.7; color: var(--c-gold);
+      opacity: 0.45; margin-bottom: 0.4em; display: block;
+      font-style: italic; pointer-events: none;
+    }
+    .s-tcard__stars {
+      color: var(--c-gold); font-size: 0.72em; letter-spacing: 0.1em;
+      margin-bottom: 0.9em;
+    }
+    .s-tcard__text {
+      font-size: 0.88em; font-weight: 300; line-height: 1.78;
+      color: var(--c-muted); margin-bottom: 1.8em;
+    }
+    .s-tcard__name {
+      font-size: 0.68em; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--c-cream);
+    }
+
+    /* ── BEST SELLERS ── */
+    .s-bestsellers { padding: 0 5vw; }
+    .s-bestsellers__hd { text-align: center; margin-bottom: 5vw; }
+    .s-bestsellers__label { /* uses .s-label */ }
+    .s-bestsellers__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 4.2vw, 5rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.02em; color: var(--c-cream);
+      margin-bottom: 0.5em;
+    }
+    .s-bestsellers__sub {
+      font-size: 0.88em; font-weight: 300; color: var(--c-muted);
+      max-width: 38em; margin: 0 auto; line-height: 1.7;
+    }
+    .s-bestsellers__grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.8vw;
+    }
+    .s-bcard {
+      position: relative;
+      cursor: default;
+    }
+    .s-bcard__img-wrap {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border-radius: 0.8em;
+      background: var(--c-elevated);
+    }
+    .s-bcard__img-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(42,18,8,0.72) 0%, rgba(42,18,8,0.15) 45%, transparent 70%);
+      transition: opacity 0.45s ease;
+    }
+    .s-bcard:hover .s-bcard__img-wrap::after { opacity: 0.5; }
+    .s-bcard__img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+      transition: transform 0.7s var(--ease-out);
+    }
+    .s-bcard:hover .s-bcard__img-wrap img { transform: scale(1.07); }
+    .s-bcard__badge {
+      position: absolute; top: 0.9em; left: 0.9em; z-index: 2;
+      background: var(--c-gold);
+      color: #1a0803;
+      font-size: 0.56em; font-weight: 800;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.35em 0.85em; border-radius: 99px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    }
+    .s-bcard__info {
+      padding: 1.2em 0.4em 0.6em;
+    }
+    .s-bcard__name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05em; font-weight: 700;
+      color: var(--c-cream); line-height: 1.2;
+      margin-bottom: 0.4em;
+      transition: color 0.25s ease;
+    }
+    .s-bcard:hover .s-bcard__name { color: var(--c-gold); }
+    .s-bcard__desc {
+      font-size: 0.72em; font-weight: 300;
+      color: var(--c-muted); line-height: 1.65;
+    }
+    .s-bcard__line {
+      display: block; width: 2em; height: 1.5px;
+      background: var(--c-gold); opacity: 0.45;
+      margin: 0.8em 0 0.7em;
+      transition: width 0.4s var(--ease-out), opacity 0.3s ease;
+    }
+    .s-bcard:hover .s-bcard__line { width: 3.5em; opacity: 0.9; }
+
+    /* ── FLOATING ORDER CTA ── */
+    .c-order-float {
+      position: fixed;
+      bottom: 2.4em; right: 2.4em;
+      z-index: 400;
+      display: flex; align-items: center; gap: 0.65em;
+      padding: 0.82em 1.5em;
+      background: var(--c-gold);
+      color: #1a0803;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72em; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      border: none; border-radius: 99px; cursor: pointer;
+      box-shadow:
+        0 4px 20px rgba(201,169,110,0.45),
+        0 2px 8px rgba(0,0,0,0.4);
+      transition:
+        transform 0.3s var(--ease-spring),
+        box-shadow 0.3s ease,
+        background 0.25s ease;
+      animation: floatPulse 3s ease-in-out infinite;
+      text-decoration: none;
+    }
+    .c-order-float:hover {
+      transform: scale(1.06) translateY(-2px);
+      background: var(--c-cream);
+      box-shadow:
+        0 8px 32px rgba(201,169,110,0.55),
+        0 4px 12px rgba(0,0,0,0.45);
+      animation: none;
+    }
+    .c-order-float:active { transform: scale(0.97); }
+    .c-order-float svg { width: 15px; height: 15px; flex-shrink: 0; }
+    @keyframes floatPulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(201,169,110,0.45), 0 2px 8px rgba(0,0,0,0.4); }
+      50%       { box-shadow: 0 6px 28px rgba(201,169,110,0.65), 0 2px 12px rgba(0,0,0,0.45); transform: translateY(-3px); }
+    }
+
+    /* ── FOOTER ── */
+    .o-footer {
+      background: #1e0c05;
+      padding: 6vw 5vw 3vw;
+      border-top: 1px solid rgba(201,169,110,0.1);
+      margin-top: auto;
+    }
+
+    .o-footer__top {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 5vw; padding-bottom: 4vw; margin-bottom: 3vw;
+      border-bottom: 1px solid rgba(255,255,255,0.055);
+    }
+
+    .o-footer__logo img {
+      height: 12em; width: auto; margin-bottom: 1.6em;
+      transition: transform 0.4s var(--ease-out), opacity 0.3s ease;
+    }
+    .o-footer__logo:hover img { transform: scale(1.05) rotate(-1deg); }
+
+    .o-footer__tagline {
+      font-size: 0.82em; font-weight: 300; color: var(--c-muted);
+      line-height: 1.75; max-width: 26em; opacity: 0.6;
+    }
+
+    .o-footer__col-hd {
+      font-size: 0.68em; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--c-gold); margin-bottom: 1.6em;
+    }
+
+    .o-footer__links { display: flex; flex-direction: column; gap: 0.9em; }
+
+    .o-footer__links a {
+      font-size: 0.85em; font-weight: 400; color: var(--c-muted);
+      transition: opacity 0.25s ease, color 0.25s ease, transform 0.25s var(--ease-spring);
+    }
+    .o-footer__links a:hover { color: var(--c-gold); transform: translateX(4px); }
+
+    .o-footer__bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.72em; color: var(--c-muted); opacity: 0.3;
+    }
+
+    /* ── MENU TABS ── */
+    .s-menu__tabs {
+      display: flex; gap: 0;
+      margin-top: 3.5vw;
+      border-bottom: 1px solid var(--c-gold-dim);
+    }
+    .s-menu__tab {
+      padding: 1.1em 2.8em;
+      font-size: 0.72em; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--c-muted); cursor: pointer;
+      border: none; border-bottom: 2px solid transparent;
+      margin-bottom: -1px; background: none;
+      transition: color 0.25s ease, border-color 0.25s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .s-menu__tab:hover { color: var(--c-cream); }
+    .s-menu__tab.is-active { color: var(--c-gold); border-bottom-color: var(--c-gold); }
+
+    .s-menu__panel { display: none; padding-top: 0.5em; }
+    .s-menu__panel.is-active { display: block; }
+
+    .s-menu__panel-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2em 1em 0.8em;
+      border-bottom: 1px solid var(--c-gold-dim);
+    }
+    .s-menu__panel-header > span:first-child { flex: 1; } /* spacer */
+
+    .s-menu__price-lbl {
+      font-size: 0.62em; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--c-gold);
+      min-width: 4em; text-align: right; white-space: nowrap;
+    }
+    /* Container that holds two column headers — mirrors .s-menu__prices */
+    .s-menu__prices-hdr {
+      display: flex; gap: 5em; flex-shrink: 0; margin-left: 2.5em;
+    }
+    .s-menu__prices-hdr .s-menu__price-lbl { min-width: 4em; text-align: right; }
+
+    .s-menu__prices {
+      display: flex; gap: 5em;
+      flex-shrink: 0; margin-left: 2.5em;
+    }
+    /* Inside the dual-price wrapper, no extra margin per span */
+    .s-menu__prices .s-menu__price { min-width: 4em; text-align: right; margin-left: 0; }
+
+    /* ── CUSTOM ORDER ── */
+    .s-order { padding: 0 5vw; }
+
+    .s-order__hd { text-align: center; margin-bottom: 4em; }
+    .s-order__heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.6vw, 4rem); font-weight: 900; line-height: 1.05;
+      text-transform: uppercase; letter-spacing: -0.02em;
+      color: var(--c-cream); margin-bottom: 0.6em;
+    }
+    .s-order__body {
+      font-size: 0.9em; font-weight: 300; line-height: 1.8;
+      color: var(--c-muted); max-width: 54ch; margin: 0 auto;
+    }
+
+    /* Two option cards */
+    .s-order__opts {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; max-width: 900px; margin: 0 auto;
+    }
+    .s-order__opt {
+      background: var(--c-surface);
+      border: 1px solid var(--c-gold-dim);
+      padding: 3.2em 3.4em;
+      display: flex; flex-direction: column; gap: 1.2em;
+      transition: border-color 0.4s ease, background 0.4s ease,
+                  box-shadow 0.4s ease;
+      cursor: pointer; position: relative; overflow: hidden;
+      text-align: left;
+    }
+    .s-order__opt::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.06) 0%, transparent 70%);
+      opacity: 0; transition: opacity 0.5s ease;
+    }
+    .s-order__opt:hover { border-color: rgba(201,169,110,0.5); }
+    .s-order__opt:hover::before { opacity: 1; }
+    .s-order__opt:hover { box-shadow: 0 2vw 5vw rgba(0,0,0,0.5), inset 0 0 0 1px rgba(201,169,110,0.08); }
+
+    .s-order__opt-icon {
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(201,169,110,0.1);
+      border: 1px solid rgba(201,169,110,0.2);
+      border-radius: 50%; flex-shrink: 0;
+      transition: background 0.3s ease, transform 0.3s var(--ease-spring);
+    }
+    .s-order__opt:hover .s-order__opt-icon {
+      background: rgba(201,169,110,0.18); transform: scale(1.08);
+    }
+    .s-order__opt-icon svg { width: 20px; height: 20px; }
+
+    .s-order__opt-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3em; font-weight: 700;
+      color: var(--c-cream); letter-spacing: -0.01em;
+    }
+    .s-order__opt-desc {
+      font-size: 0.82em; font-weight: 300; line-height: 1.75;
+      color: var(--c-muted);
+    }
+
+    .s-order__opt-cta {
+      display: inline-flex; align-items: center; gap: 0.65em;
+      margin-top: auto; padding-top: 1.2em;
+      border-top: 1px solid var(--c-gold-dim);
+      font-size: 0.68em; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      transition: gap 0.3s var(--ease-spring);
+    }
+    .s-order__opt:hover .s-order__opt-cta { gap: 1em; }
+
+    .s-order__opt--wa .s-order__opt-icon svg,
+    .s-order__opt--wa .s-order__opt-cta { color: #4ee073; }
+
+    .s-order__opt--form .s-order__opt-icon svg,
+    .s-order__opt--form .s-order__opt-cta { color: var(--c-gold); }
+
+    /* Expandable form panel */
+    .s-order__form-wrap {
+      max-width: 900px; margin: 2px auto 0;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.65s cubic-bezier(0.4,0,0.2,1),
+                  opacity 0.4s ease;
+      opacity: 0;
+    }
+    .s-order__form-wrap.is-open {
+      max-height: 1000px; opacity: 1;
+    }
+
+    .s-order__form-inner {
+      background: var(--c-surface);
+      border: 1px solid var(--c-gold-dim);
+      border-top: none;
+      padding: 3em 3.4em 3.4em;
+    }
+
+    .s-order__form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4em;
+    }
+    .s-order__form-grid .s-order__field--full { grid-column: 1 / -1; }
+
+    .s-order__field { display: flex; flex-direction: column; gap: 0.55em; }
+
+    .s-order__field label {
+      font-size: 0.62em; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-pink);
+    }
+
+    .s-order__field input,
+    .s-order__field select,
+    .s-order__field textarea {
+      background: var(--c-elevated); border: 1px solid rgba(201,169,110,0.18);
+      color: var(--c-text); font-family: 'Montserrat', sans-serif;
+      font-size: 0.88em; font-weight: 300; padding: 0.9em 1.2em;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      resize: none;
+    }
+    .s-order__field input::placeholder,
+    .s-order__field textarea::placeholder { color: var(--c-muted); opacity: 0.5; }
+    .s-order__field input:focus,
+    .s-order__field select:focus,
+    .s-order__field textarea:focus {
+      border-color: rgba(201,169,110,0.5);
+      box-shadow: 0 0 0 3px rgba(201,169,110,0.06);
+    }
+    .s-order__field select option { background: var(--c-elevated); }
+
+    .s-order__form-actions {
+      display: flex; gap: 1em; margin-top: 2em; flex-wrap: wrap;
+    }
+
+    .s-order__btn-submit,
+    .s-order__btn-wa {
+      display: inline-flex; align-items: center; gap: 0.75em;
+      padding: 1em 2em; font-family: 'Montserrat', sans-serif;
+      font-size: 0.7em; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;
+      border: 1px solid; transition: background 0.3s ease, color 0.3s ease,
+        transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
+    }
+    .s-order__btn-submit {
+      background: var(--c-gold); color: var(--c-bg);
+      border-color: var(--c-gold);
+    }
+    .s-order__btn-submit:hover {
+      background: transparent; color: var(--c-gold);
+      transform: scale(1.02);
+    }
+    .s-order__btn-submit:active { transform: scale(0.98); }
+
+    .s-order__btn-wa {
+      background: transparent; color: #4ee073; border-color: #4ee073;
+    }
+    .s-order__btn-wa:hover {
+      background: #25D366; color: #fff; border-color: #25D366;
+      transform: scale(1.02);
+    }
+    .s-order__btn-wa:active { transform: scale(0.98); }
+
+    .s-order__success {
+      display: none; align-items: center; gap: 1em;
+      background: rgba(78,224,115,0.08);
+      border: 1px solid rgba(78,224,115,0.25);
+      padding: 1.2em 1.8em;
+      color: #4ee073;
+      font-size: 0.82em; font-weight: 500; line-height: 1.6;
+      margin-top: 1.6em;
+    }
+    .s-order__success.is-visible { display: flex; }
+
+    /* ── CUSTOM CURSOR (desktop only) ── */
+    @media (pointer: fine) {
+    * { cursor: none !important; }
+    #cursor-dot {
+      position: fixed; top: 0; left: 0; z-index: 99999;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--c-gold);
+      pointer-events: none;
+      transform: translate(-50%,-50%);
+      transition: transform 0.12s var(--ease-spring), opacity 0.25s ease;
+      will-change: transform;
+    }
+    #cursor-ring {
+      position: fixed; top: 0; left: 0; z-index: 99998;
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1.5px solid rgba(201,169,110,0.55);
+      pointer-events: none;
+      transform: translate(-50%,-50%);
+      transition: width 0.35s var(--ease-spring), height 0.35s var(--ease-spring),
+                  border-color 0.35s ease, opacity 0.25s ease;
+      will-change: transform;
+    }
+    body.cursor-hover #cursor-ring {
+      width: 54px; height: 54px;
+      border-color: rgba(201,169,110,0.85);
+    }
+    body.cursor-click #cursor-dot {
+      transform: translate(-50%,-50%) scale(0.65);
+    }
+    } /* end @media (pointer: fine) */
+
+    @media (pointer: coarse) {
+      #cursor-dot, #cursor-ring { display: none; }
+    }
+
+    /* ── FOCUS STATES ── */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--c-pink);
+      outline-offset: 3px;
+    }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE — TABLET  ≤ 900px
+    ══════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .s-about {
+        grid-template-columns: 1fr;
+        gap: 8vw;
+      }
+      .s-about__photos { height: 70vw; }
+      .s-about__heading { font-size: 6vw; }
+
+      .s-baker__inner { grid-template-columns: 1fr; gap: 8vw; }
+      .s-baker__name { font-size: 7vw; }
+
+      .s-gallery__grid { grid-template-columns: repeat(3, 1fr); }
+
+      .s-testimonials__grid { grid-template-columns: repeat(2, 1fr); gap: 2vw; }
+
+      .s-bestsellers__grid { grid-template-columns: repeat(3, 1fr); gap: 2.5vw; }
+      .c-order-float { bottom: 1.8em; right: 1.8em; }
+
+      .o-footer__top { grid-template-columns: 1fr 1fr; gap: 6vw; }
+    }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE — MOBILE  ≤ 640px
+    ══════════════════════════════════════ */
+    @media (max-width: 640px) {
+
+      /* ── SECTION RHYTHM ── */
+      .o-home_section { margin: 14vw 0; }
+      .o-home_section.o-hero { margin-top: 0; margin-bottom: 0; }
+
+      /* ── ANIMATIONS — shorter travel on mobile ── */
+      .is-animated [data-animate]       { transform: translateY(22px); }
+      .is-animated [data-animate="left"]  { transform: translateX(-22px); }
+      .is-animated [data-animate="right"] { transform: translateX(22px); }
+      .is-animated [data-animate="scale"] { transform: scale(0.95); }
+      .is-animated [data-animate].is-visible { opacity: 1; transform: translate(0) scale(1); }
+
+      /* ── NAV ── */
+      .c-logo img { height: 5em; }
+      .c-logo { left: 50%; transform: translateX(-50%); }
+      .c-nav { top: 5em; padding: 0.6em 5vw; grid-template-columns: auto 1fr auto; }
+      .c-nav.is-scrolled { top: 0; }
+      .c-nav__links { display: none; }
+      .c-nav__social { display: none; }
+      .c-nav__burger { display: flex; }
+      .c-nav__drawer { display: flex; }
+      .c-nav__drawer a { font-size: 1.3em; }
+
+      /* ── HERO ── */
+      .o-hero {
+        align-items: flex-end;
+        padding: 0 0 10vw 0;
+        min-height: 100svh;
+      }
+      /* Full-width slider on mobile */
+      .o-hero__slider {
+        width: 100%; height: 100%;
+        top: 0; right: 0;
+      }
+      .o-hero__fade {
+        background:
+          linear-gradient(to top, var(--c-bg) 22%, rgba(42,18,8,0.82) 55%, rgba(42,18,8,0.3) 100%),
+          linear-gradient(to bottom, rgba(42,18,8,0.55) 0%, transparent 30%);
+      }
+      .o-hero__content {
+        position: relative; z-index: 5;
+        max-width: 100%; padding: 0 7vw;
+        text-align: center;
+      }
+      .o-hero__eyebrow {
+        position: static; margin-bottom: 1.6em;
+        font-size: 0.62em; text-align: center;
+        display: block;
+      }
+      .o-hero__title { font-size: clamp(2.6rem, 11vw, 4.5rem); line-height: 0.9; }
+      .o-hero__body  { font-size: 0.85em; max-width: 100%; margin-top: 1.2em; line-height: 1.65; }
+      .o-hero__cta   { margin-top: 2em; padding: 1em 2.4em; font-size: 0.78em; }
+      /* Hide arrows on mobile — dots are enough */
+      .o-hero__arrow { display: none; }
+      .o-hero__dots  { bottom: 14vw; right: 50%; transform: translateX(50%); }
+      .o-hero__progress { height: 3px; }
+
+      /* ── ABOUT ── */
+      .s-about { grid-template-columns: 1fr; gap: 8vw; padding: 0 6vw; }
+      .s-about__photos { height: 75vw; }
+      .s-about__ph2 { width: 52%; height: 65%; bottom: -6%; right: -4%; }
+      .s-about__heading { font-size: clamp(1.8rem, 7.5vw, 2.8rem); margin-bottom: 1em; }
+      .s-about__body { font-size: 0.9em; line-height: 1.8; margin-bottom: 1.8em; }
+
+      /* ── BEST SELLERS ── */
+      .s-bestsellers { padding: 0 4vw; }
+      .s-bestsellers__title { font-size: clamp(2.2rem, 8vw, 3.2rem); }
+      .s-bestsellers__sub { font-size: 0.84em; }
+      /* Horizontal scroll carousel on mobile */
+      .s-bestsellers__grid {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        gap: 3.5vw;
+        padding-bottom: 2vw;
+        grid-template-columns: unset;
+        /* hide scrollbar */
+        scrollbar-width: none;
+      }
+      .s-bestsellers__grid::-webkit-scrollbar { display: none; }
+      .s-bcard {
+        flex: 0 0 62vw;
+        scroll-snap-align: start;
+      }
+      .s-bcard__img-wrap { aspect-ratio: 3 / 4; }
+      .s-bcard__name { font-size: 1em; }
+      .s-bcard__desc { font-size: 0.74em; }
+      /* Peek indicator */
+      .s-bestsellers { position: relative; }
+      .s-bestsellers::after {
+        content: '';
+        position: absolute; right: 0; top: 0; bottom: 0; width: 5vw;
+        background: linear-gradient(to left, var(--c-bg), transparent);
+        pointer-events: none; z-index: 2;
+      }
+
+      /* ── MENU ── */
+      .s-menu { padding: 0 5vw; }
+      .s-menu__hd { flex-direction: column; align-items: flex-start; gap: 1.2em; padding-bottom: 8vw; }
+      .s-menu__title { font-size: clamp(3rem, 13vw, 6rem); }
+      .s-menu__note { text-align: left; max-width: 100%; font-size: 0.82em; }
+      .s-menu__tabs { gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; position: relative; }
+      .s-menu__tabs::-webkit-scrollbar { display: none; }
+      .s-menu__tab { padding: 1.1em 1.8em; flex-shrink: 0; font-size: 0.72em; }
+      .s-menu__item { padding: 1.4em 0; align-items: flex-start; flex-wrap: nowrap; }
+      .s-menu__item > div:first-child { flex: 1; min-width: 0; }
+      .s-menu__item-name { font-size: 0.96em; }
+      .s-menu__prices { gap: 2em; }
+      .s-menu__prices-hdr { gap: 2em; }
+      .s-menu__panel-header { gap: 2em; padding: 1.4em 0 0.8em; }
+      .s-menu__desc { max-width: 100%; font-size: 0.85em; }
+      /* Tab fade hint */
+      .s-menu__tabs::after {
+        content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 3em;
+        background: linear-gradient(to left, var(--c-bg), transparent);
+        pointer-events: none;
+      }
+
+      /* ── BAKER ── */
+      .s-baker { padding: 0 5vw; }
+      .s-baker__inner { grid-template-columns: 1fr; gap: 8vw; }
+      .s-baker__card { padding: 2.4em 2em; border-radius: 0.6em; }
+      .s-baker__lavonne { max-height: 2.8em; margin-bottom: 2em; }
+      .s-baker__cred { font-size: 0.82em; gap: 0.9em; margin-bottom: 1.2em; }
+      .s-baker__cred-icon { width: 2.2em; height: 2.2em; font-size: 0.85em; flex-shrink: 0; }
+      .s-baker__name { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+      .s-baker__founder-title { font-size: 0.82em; margin-bottom: 1.4em; }
+      .s-baker__bio { font-size: 0.88em; line-height: 1.8; }
+      .s-baker__badge { font-size: 0.72em; padding: 0.7em 1.4em; margin-top: 1.8em; display: inline-block; }
+
+      /* ── FULL BLEED ── */
+      .o-fullbleed { height: 56vw; }
+
+      /* ── GALLERY ── */
+      .s-gallery { padding: 0 4vw; }
+      .s-gallery__header { margin-bottom: 4vw; }
+      .s-gallery__grid { grid-template-columns: repeat(2, 1fr); gap: 4px; }
+      .s-gallery__item:nth-child(5n+1) { grid-column: span 2; aspect-ratio: 2 / 1; }
+      .s-gallery__item::before { font-size: 1.4em; }
+
+      /* ── TESTIMONIALS ── */
+      .s-testimonials { padding: 0 5vw; }
+      .s-testimonials__hd { margin-bottom: 8vw; }
+      .s-testimonials__title { font-size: clamp(2rem, 8.5vw, 3rem); }
+      .s-testimonials__grid { grid-template-columns: 1fr; gap: 4vw; }
+      .s-tcard { padding: 2em 1.8em; }
+      .s-tcard__quote { font-size: 2.8em; }
+      .s-tcard__text { font-size: 0.9em; }
+
+      /* ── ORDER ── */
+      .s-order { padding: 0 5vw; }
+      .s-order__hd { margin-bottom: 8vw; }
+      .s-order__heading { font-size: clamp(2rem, 9vw, 3.2rem); line-height: 1.0; }
+      .s-order__body { font-size: 0.88em; }
+      .s-order__opts { grid-template-columns: 1fr; gap: 3vw; }
+      .s-order__opt { padding: 2.4em 2em; border-radius: 0.6em; }
+      .s-order__opt-title { font-size: 1.05em; }
+      .s-order__form-grid { grid-template-columns: 1fr; }
+      .s-order__form-grid .s-order__field--full { grid-column: 1; }
+      .s-order__form-inner { padding: 2em 1.6em 2.4em; }
+      .s-order__form-actions { flex-direction: column; gap: 0.8em; }
+      .s-order__btn-submit,
+      .s-order__btn-wa { width: 100%; justify-content: center; padding: 1em; }
+
+      /* ── FLOATING CTA — lift above bottom of screen ── */
+      .c-order-float {
+        bottom: 1.2em; right: 1.2em;
+        font-size: 0.7em; padding: 0.9em 1.4em;
+        gap: 0.55em;
+      }
+
+      /* ── FOOTER ── */
+      .o-footer { padding: 14vw 6vw 8vw; }
+      .o-footer__top { grid-template-columns: 1fr; gap: 8vw; }
+      .o-footer__bottom { flex-direction: column; gap: 0.6em; text-align: center; font-size: 0.78em; }
+      .o-footer__logo img { height: 8em; }
+      .o-footer__tagline { font-size: 0.9em; }
+      .o-footer__col-hd { font-size: 0.65em; }
+      .o-footer__links a { font-size: 0.9em; }
+
+      /* ── LIGHTBOX ── */
+      .c-lightbox__img { max-width: 96vw; max-height: 80vh; }
+      .c-lightbox__arrow--prev { left: 0.5em; }
+      .c-lightbox__arrow--next { right: 0.5em; }
+      .c-lightbox__arrow { width: 38px; height: 38px; font-size: 1.1em; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ FLOATING LOGO ══ -->
+  <a href="/" class="c-logo" aria-label="The Dough Knot home">
+    <img src="/brand_assets/DOUGH KNOT LOGO PNG.png" alt="The Dough Knot">
+  </a>
+
+  <!-- ══ NAVIGATION ══ -->
+  <nav class="c-nav" id="c-nav">
+    <!-- Left col: empty on desktop, burger on mobile -->
+    <button class="c-nav__burger" id="c-nav-burger" aria-label="Open menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- Center col: nav links -->
+    <ul class="c-nav__links">
+      <li><a href="#about">Our Story</a></li>
+      <li><a href="#bestsellers">Best Sellers</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#custom">Order a Cake</a></li>
+    </ul>
+
+    <!-- Right col: social icons -->
+    <div class="c-nav__social">
+      <a href="https://www.instagram.com/thedoughknot.ae/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <a href="https://wa.me/971567894758" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="c-nav__drawer" id="c-nav-drawer">
+    <a href="#about"       onclick="closeMobileMenu()">Our Story</a>
+    <a href="#bestsellers" onclick="closeMobileMenu()">Best Sellers</a>
+    <a href="#menu"        onclick="closeMobileMenu()">Menu</a>
+    <a href="#gallery"     onclick="closeMobileMenu()">Gallery</a>
+    <a href="#custom"      onclick="closeMobileMenu()">Order a Cake</a>
+    <div class="drawer-social">
+      <a href="https://www.instagram.com/thedoughknot.ae/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://wa.me/971567894758" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- ══ HERO ══ -->
+  <section class="o-home_section o-hero" id="o-hero">
+    <!-- Slider -->
+    <div class="o-hero__slider" id="hero-slider">
+      <div class="o-hero__slide is-active">
+        <img src="/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.01%20PM.jpeg" alt="The Dough Knot">
+      </div>
+      <div class="o-hero__slide">
+        <img src="/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.12%20PM%20(4).jpeg" alt="The Dough Knot">
+      </div>
+      <div class="o-hero__slide">
+        <img src="/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.11%20PM.jpeg" alt="The Dough Knot">
+      </div>
+      <div class="o-hero__slide">
+        <img src="/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.09%20PM.jpeg" alt="The Dough Knot">
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="o-hero__progress"><div class="o-hero__progress-bar" id="hero-progress"></div></div>
+
+    <!-- Arrows -->
+    <button class="o-hero__arrow o-hero__arrow--prev" onclick="heroSlider.prev()" aria-label="Previous slide">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3L5 8l5 5"/></svg>
+    </button>
+    <button class="o-hero__arrow o-hero__arrow--next" onclick="heroSlider.next()" aria-label="Next slide">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg>
+    </button>
+
+    <!-- Dots -->
+    <div class="o-hero__dots" id="hero-dots"></div>
+
+    <div class="o-hero__tint"></div>
+    <div class="o-hero__fade"></div>
+    <p class="o-hero__eyebrow">Cakes, Desserts &amp; More · Dubai, UAE</p>
+    <div class="o-hero__content">
+      <h1 class="o-hero__title">
+        <span class="word-wrap"><span class="word" style="animation-delay:0.05s">Made to</span></span><br>
+        <em><span class="word-wrap"><span class="word" style="animation-delay:0.18s">Order,</span></span></em><br>
+        <span class="word-wrap"><span class="word" style="animation-delay:0.30s">Baked</span></span><br>
+        <span class="word-wrap"><span class="word" style="animation-delay:0.42s">with Love.</span></span>
+      </h1>
+      <p class="o-hero__body">
+        Every bite handcrafted with love — from showstopping celebration cakes to the perfect everyday indulgence.
+      </p>
+      <a href="#menu" class="o-hero__cta">View Our Menu</a>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT / HOURS ══ -->
+  <section class="o-home_section" id="about">
+    <div class="s-about">
+      <div class="s-about__photos" data-animate="left">
+        <img
+          class="s-about__ph1"
+          src="/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.09%20PM.jpeg"
+          alt="Freshly made strawberry cream buns"
+        >
+        <img
+          class="s-about__ph2"
+          src="/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.04%20PM.jpeg"
+          alt="Pink rose cupcakes"
+        >
+      </div>
+      <div class="s-about__text" data-animate="right">
+        <p class="s-label">Our Story</p>
+        <h2 class="s-about__heading">Made from scratch,<br>baked with heart</h2>
+        <p class="s-about__body">
+          The Dough Knot started as a passion project in a home kitchen and grew into something much sweeter.
+          Every cake, cookie, and pastry is handcrafted to order using the finest ingredients — because you
+          deserve nothing less than the best.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ BEST SELLERS ══ -->
+  <section class="o-home_section s-bestsellers" id="bestsellers">
+    <div class="s-bestsellers__hd" data-animate="fade">
+      <p class="s-label">Fan Favourites</p>
+      <h2 class="s-bestsellers__title">Our Best Sellers</h2>
+      <p class="s-bestsellers__sub">The creations our customers keep coming back for — handcrafted fresh, every single time.</p>
+    </div>
+    <div class="s-bestsellers__grid" id="bestsellers-grid">
+
+      <div class="s-bcard" data-animate style="--delay:0ms">
+        <div class="s-bcard__img-wrap">
+          <img src="/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.03%20PM%20(2).jpeg" alt="Brownies" loading="lazy">
+          <span class="s-bcard__badge">Best Seller</span>
+        </div>
+        <div class="s-bcard__info">
+          <p class="s-bcard__name">Brownies</p>
+          <span class="s-bcard__line"></span>
+          <p class="s-bcard__desc">Rich, fudgy, and indulgent — available in Nutella, Hazelnut, Lotus Biscoff &amp; more.</p>
+        </div>
+      </div>
+
+      <div class="s-bcard" data-animate style="--delay:80ms">
+        <div class="s-bcard__img-wrap">
+          <img src="/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.06%20PM.jpeg" alt="Cookies" loading="lazy">
+          <span class="s-bcard__badge">Best Seller</span>
+        </div>
+        <div class="s-bcard__info">
+          <p class="s-bcard__name">Cookies</p>
+          <span class="s-bcard__line"></span>
+          <p class="s-bcard__desc">Gooey centres, perfectly crisp edges — chocolate chip, double choc, red velvet &amp; more.</p>
+        </div>
+      </div>
+
+      <div class="s-bcard" data-animate style="--delay:160ms">
+        <div class="s-bcard__img-wrap">
+          <img src="/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.09%20PM.jpeg" alt="Berliners" loading="lazy">
+          <span class="s-bcard__badge">Customer Fave</span>
+        </div>
+        <div class="s-bcard__info">
+          <p class="s-bcard__name">Berliners</p>
+          <span class="s-bcard__line"></span>
+          <p class="s-bcard__desc">Pillowy soft filled doughnuts, rolled in sugar, topped with cream and fresh fruit.</p>
+        </div>
+      </div>
+
+      <div class="s-bcard" data-animate style="--delay:240ms">
+        <div class="s-bcard__img-wrap">
+          <img src="/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.12%20PM%20(2).jpeg" alt="Dream Cake" loading="lazy">
+          <span class="s-bcard__badge">Signature</span>
+        </div>
+        <div class="s-bcard__info">
+          <p class="s-bcard__name">Dream Cake</p>
+          <span class="s-bcard__line"></span>
+          <p class="s-bcard__desc">Dreamy white cream, rose petals &amp; pistachio — elegant, light, and utterly irresistible.</p>
+        </div>
+      </div>
+
+      <div class="s-bcard" data-animate style="--delay:320ms">
+        <div class="s-bcard__img-wrap">
+          <img src="/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.01%20PM.jpeg" alt="White Chocolate Raspberry Cake" loading="lazy">
+          <span class="s-bcard__badge">Signature</span>
+        </div>
+        <div class="s-bcard__info">
+          <p class="s-bcard__name">White Chocolate Raspberry Cake</p>
+          <span class="s-bcard__line"></span>
+          <p class="s-bcard__desc">Vanilla sponge, white chocolate ganache &amp; fresh raspberries — the showstopper.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ BAKER / FOUNDER ══ -->
+  <section class="o-home_section s-baker" id="baker">
+    <div class="s-baker__inner">
+      <div class="s-baker__card" data-animate="left">
+        <img class="s-baker__lavonne" id="lavonne-logo"
+          src="https://www.lavonne.in/wp-content/uploads/2018/03/lavonne-logo-white.png"
+          alt="Lavonne Academy of Baking Science and Pastry Arts"
+          onerror="this.style.display='none'">
+        <div class="s-baker__cred">
+          <div class="s-baker__cred-icon">🎓</div>
+          <span><strong style="color:var(--c-cream);font-weight:500" id="baker-school">Lavonne Academy of Baking Science and Pastry Arts</strong><br>Bangalore, India</span>
+        </div>
+        <div class="s-baker__cred">
+          <div class="s-baker__cred-icon">★</div>
+          <span>Certified Pastry Chef &amp; Professional Baker</span>
+        </div>
+        <div class="s-baker__cred">
+          <div class="s-baker__cred-icon">📍</div>
+          <span>Now based in Dubai, UAE — bringing artisan baking to your door</span>
+        </div>
+      </div>
+      <div class="s-baker__text" data-animate="right">
+        <p class="s-label">Meet the Baker</p>
+        <h2 class="s-baker__name" id="baker-name">Naurah<br>Nafeesa</h2>
+        <p class="s-baker__founder-title" id="baker-title">Pastry Chef &amp; Founder</p>
+        <p class="s-baker__bio" id="baker-bio">Naurah Nafeesa is a passionate and experienced baker whose love for pastry turned into a lifelong craft. A graduate of the prestigious Lavonne Academy of Baking Science and Pastry Arts in Bangalore, India, she has been creating extraordinary baked goods professionally since 2017 — first in India, and now bringing her expertise and heart to Dubai through The Dough Knot.</p>
+        <div class="s-baker__badge" id="baker-since">Baking professionally since 2017</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MENU ══ -->
+  <section class="o-home_section s-menu" id="menu">
+    <div class="s-menu__hd" data-animate="fade">
+      <h2 class="s-menu__title">Menu</h2>
+      <p class="s-menu__note">All items baked fresh daily. Custom orders available with 48 hours notice.</p>
+    </div>
+
+    <!-- Tab Bar — built dynamically by renderMenuFromCMS -->
+    <div class="s-menu__tabs" role="tablist" data-animate="fade">
+      <button class="s-menu__tab is-active" data-tab="brownies" role="tab" aria-selected="true">Brownies</button>
+      <button class="s-menu__tab" data-tab="cakes" role="tab">Cakes</button>
+      <button class="s-menu__tab" data-tab="cookies" role="tab">Cookies</button>
+    </div>
+
+    <!-- Panels container — rebuilt dynamically -->
+    <div class="s-menu__panels">
+
+    <!-- Brownies Panel -->
+    <div class="s-menu__panel is-active" id="tab-brownies">
+      <div class="s-menu__panel-header">
+        <span></span><div class="s-menu__prices-hdr"><span class="s-menu__price-lbl">6 pcs</span><span class="s-menu__price-lbl">Slab</span></div>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Nutella Brownies</p><p class="s-menu__desc">Rich fudgy brownies swirled with creamy Nutella — an irresistible chocolate fix</p></div>
+        <div class="s-menu__prices"><span class="s-menu__price">AED 50</span><span class="s-menu__price">AED 120</span></div>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Fudge Brownies</p><p class="s-menu__desc">Ultimate chocolate indulgence — intensely chocolatey, timeless, and never fails to delight</p></div>
+        <div class="s-menu__prices"><span class="s-menu__price">AED 40</span><span class="s-menu__price">AED 110</span></div>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Red Velvet Cheesecake Brownies</p><p class="s-menu__desc">Moist red velvet base topped with silky smooth cheesecake — visually stunning and delicious</p></div>
+        <div class="s-menu__prices"><span class="s-menu__price">AED 50</span><span class="s-menu__price">AED 120</span></div>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Hazelnut Brownies</p><p class="s-menu__desc">Rich fudgy brownies packed with crunchy hazelnuts — a perfect balance of texture and flavour</p></div>
+        <div class="s-menu__prices"><span class="s-menu__price">AED 60</span><span class="s-menu__price">AED 130</span></div>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Roasted Almond Brownies</p><p class="s-menu__desc">Fudgy brownies loaded with roasted almonds — a sophisticated twist on a classic</p></div>
+        <div class="s-menu__prices"><span class="s-menu__price">AED 40</span><span class="s-menu__price">AED 110</span></div>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Chocolate Cheesecake Brownies</p><p class="s-menu__desc">Rich fudgy brownies layered with decadent chocolate cheesecake — pure indulgence</p></div>
+        <div class="s-menu__prices"><span class="s-menu__price">AED 60</span><span class="s-menu__price">AED 130</span></div>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Lotus Biscoff Brownies</p><p class="s-menu__desc">Sweet caramelised Lotus Biscoff swirled into rich fudgy brownies — a delightfully unexpected treat</p></div>
+        <div class="s-menu__prices"><span class="s-menu__price">AED 50</span><span class="s-menu__price">AED 120</span></div>
+      </div>
+    </div>
+
+    <!-- Cakes Panel -->
+    <div class="s-menu__panel" id="tab-cakes">
+      <div class="s-menu__panel-header">
+        <span></span><span class="s-menu__price-lbl">Price</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">White Chocolate Raspberry Cake</p><p class="s-menu__desc">Vanilla sponge, white chocolate ganache, tangy raspberry compote, finished with fresh raspberries</p></div>
+        <span class="s-menu__price">AED 180</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Belgian Chocolate Cake</p><p class="s-menu__desc">Dense, fudgy sponge with premium Belgian chocolate enveloped in velvety chocolate ganache</p></div>
+        <span class="s-menu__price">AED 200</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Ferrero Rocher Cake</p><p class="s-menu__desc">Hazelnut-chocolate sponge, Nutella cream, roasted hazelnuts, coated in decadent chocolate ganache</p></div>
+        <span class="s-menu__price">AED 160</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Cookies &amp; Cream Cake</p><p class="s-menu__desc">Oreo-infused frosting, crushed cookies, and white Oreos — a nostalgic favourite</p></div>
+        <span class="s-menu__price">AED 140</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Reese's Chocolate Cake</p><p class="s-menu__desc">Chocolate cake, creamy peanut butter filling, rich chocolate ganache, topped with Reese's Pieces</p></div>
+        <span class="s-menu__price">AED 180</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Almond Nutella Cake</p><p class="s-menu__desc">Almond sponge, Nutella filling, roasted almonds, and Nutella buttercream — sweet and crunchy</p></div>
+        <span class="s-menu__price">AED 140</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Truffle Chocolate Cake</p><p class="s-menu__desc">Dense chocolate layers, glossy chocolate glaze adorned with hand-rolled chocolate truffles</p></div>
+        <span class="s-menu__price">AED 120</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Matilda Chocolate Cake</p><p class="s-menu__desc">Rich moist chocolate sponge, luscious chocolate fudge filling, thick chocolate frosting — every chocoholic's fantasy</p></div>
+        <span class="s-menu__price">AED 150</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Lotus Biscoff Cake</p><p class="s-menu__desc">Vanilla sponge layered with Biscoff spread and buttercream, topped with crushed Biscoff</p></div>
+        <span class="s-menu__price">AED 140</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Rafaello White Chocolate Cake</p><p class="s-menu__desc">Light coconut sponge, white chocolate-almond filling, white chocolate frosting — elegant and refined</p></div>
+        <span class="s-menu__price">AED 140</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Tiramisu Cake</p><p class="s-menu__desc">Coffee-soaked sponge, creamy mascarpone filling, dusted with cocoa — a decadent Italian classic</p></div>
+        <span class="s-menu__price">AED 150</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Salted Caramel Cake</p><p class="s-menu__desc">Vanilla sponge, rich salted caramel filling, caramel drizzle — the perfect sweet and savoury balance</p></div>
+        <span class="s-menu__price">AED 110</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Caramel Crunch Cake</p><p class="s-menu__desc">Caramel sponge, crunchy caramel pieces, caramel cream and sugar shards — a sweet, crunchy indulgence</p></div>
+        <span class="s-menu__price">AED 130</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Hazelnut Praline Cake</p><p class="s-menu__desc">Hazelnut sponge, smooth praline filling, chocolate ganache, topped with toasted hazelnuts</p></div>
+        <span class="s-menu__price">AED 150</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Victoria Sandwich Cake</p><p class="s-menu__desc">Classic light vanilla sponge, strawberry jam, vanilla cream, dusted with powdered sugar</p></div>
+        <span class="s-menu__price">AED 100</span>
+      </div>
+    </div>
+
+    <!-- Cookies Panel -->
+    <div class="s-menu__panel" id="tab-cookies">
+      <div class="s-menu__panel-header">
+        <span></span><span class="s-menu__price-lbl">4 pcs</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Chocolate Chip Filled Cookies</p><p class="s-menu__desc">Gooey melted chocolate chip centre that will tantalize your taste buds</p></div>
+        <span class="s-menu__price">AED 30</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Double Chocolate Filled Cookies</p><p class="s-menu__desc">Rich, irresistible cookies packed with a double dose of decadent chocolate</p></div>
+        <span class="s-menu__price">AED 35</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Brookies</p><p class="s-menu__desc">The best of both worlds — fudgy brownie meets chewy cookie in one heavenly treat</p></div>
+        <span class="s-menu__price">AED 25</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Dulce De Leche Cookies</p><p class="s-menu__desc">Creamy caramelised dulce de leche filling — perfect paired with a sweet latte</p></div>
+        <span class="s-menu__price">AED 30</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Red Velvet Cookies</p><p class="s-menu__desc">Soft chewy red velvet cookies with a hint of cocoa and white chocolate</p></div>
+        <span class="s-menu__price">AED 15</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Butter Cookies</p><p class="s-menu__desc">Timeless, classic — perfectly crisp and buttery, melts in your mouth with every bite</p></div>
+        <span class="s-menu__price">AED 15</span>
+      </div>
+      <div class="s-menu__item">
+        <div><p class="s-menu__name">Salted Caramel Pecan Cookies</p><p class="s-menu__desc">Irresistible sweet-salty cookies filled with luscious caramel and crunchy pecans</p></div>
+        <span class="s-menu__price">AED 35</span>
+      </div>
+    </div>
+
+    </div><!-- end .s-menu__panels -->
+  </section>
+
+  <!-- ══ FULL-BLEED PHOTO ══ -->
+  <div class="o-fullbleed" data-animate="scale">
+    <img
+      src="/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.12%20PM.jpeg"
+      alt="Dough Knot baked goods"
+    >
+    <div class="o-fullbleed__tint"></div>
+    <div class="o-fullbleed__shade"></div>
+  </div>
+
+  <!-- ══ GALLERY ══ -->
+  <section class="o-home_section s-gallery" id="gallery">
+    <div class="s-gallery__header">
+      <p class="s-label" style="margin-bottom:0;" data-animate>Our Work</p>
+      <a href="https://www.instagram.com/thedoughknot.ae/" target="_blank" rel="noopener" class="s-gallery__viewall" data-animate="right">@thedoughknot.ae ↗</a>
+    </div>
+    <div class="s-gallery__grid" id="gallery-grid" data-animate="fade"></div>
+  </section>
+
+  <!-- ══ TESTIMONIALS ══ -->
+  <section class="o-home_section s-testimonials" id="testimonials">
+    <div class="s-testimonials__hd" data-animate="fade">
+      <p class="s-label" style="text-align:center">Happy Customers</p>
+      <h2 class="s-testimonials__title">What They're<br><em style="color:var(--c-pink);font-style:italic">Saying</em></h2>
+    </div>
+    <div class="s-testimonials__grid" id="testimonials-grid"></div>
+  </section>
+
+  <!-- ══ CUSTOM ORDER ══ -->
+  <section class="o-home_section s-order" id="custom">
+    <div class="s-order__hd" data-animate="fade">
+      <p class="s-label">Custom Orders</p>
+      <h2 class="s-order__heading">Something Special<br><em style="font-style:italic;color:var(--c-gold)">In Mind?</em></h2>
+      <p class="s-order__body">
+        Every creation is made to order and tailored to your vision. Whether it's a birthday cake, a wedding dessert table, or a box of brownies with your favourite flavours — we make it happen.
+      </p>
+    </div>
+
+    <!-- Two option cards -->
+    <div class="s-order__opts" data-animate="fade" data-delay="120">
+
+      <!-- WhatsApp card -->
+      <a href="https://wa.me/971567894758" class="s-order__opt s-order__opt--wa" target="_blank" rel="noopener">
+        <div class="s-order__opt-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <p class="s-order__opt-title">Chat on WhatsApp</p>
+        <p class="s-order__opt-desc">Get in touch directly and we'll help you plan every detail — flavours, design, size, and delivery.</p>
+        <div class="s-order__opt-cta">
+          Open WhatsApp
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+        </div>
+      </a>
+
+      <!-- Submit request card -->
+      <button type="button" class="s-order__opt s-order__opt--form" onclick="toggleOrderForm()" id="form-toggle">
+        <div class="s-order__opt-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <p class="s-order__opt-title">Submit a Request</p>
+        <p class="s-order__opt-desc">Fill out a short form and we'll reach back out to you to confirm all the details and finalize your order.</p>
+        <div class="s-order__opt-cta">
+          Fill Out the Form
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v12M2 9l6 6 6-6"/></svg>
+        </div>
+      </button>
+    </div>
+
+    <!-- Expandable form -->
+    <div class="s-order__form-wrap" id="order-form-wrap">
+      <div class="s-order__form-inner">
+        <form id="order-form" onsubmit="return false">
+          <div class="s-order__form-grid">
+            <div class="s-order__field">
+              <label for="order-name">Your Name</label>
+              <input type="text" id="order-name" placeholder="Your name" autocomplete="name">
+            </div>
+            <div class="s-order__field">
+              <label for="order-phone">WhatsApp Number</label>
+              <input type="tel" id="order-phone" placeholder="+971 XX XXX XXXX" autocomplete="tel">
+            </div>
+            <div class="s-order__field">
+              <label for="order-occasion">Occasion</label>
+              <select id="order-occasion">
+                <option value="">Select occasion…</option>
+                <option>Birthday</option>
+                <option>Wedding / Engagement</option>
+                <option>Anniversary</option>
+                <option>Baby Shower</option>
+                <option>Corporate Event</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="s-order__field">
+              <label for="order-date">Date Needed</label>
+              <input type="date" id="order-date">
+            </div>
+            <div class="s-order__field s-order__field--full">
+              <label for="order-details">Tell Us What You'd Like</label>
+              <textarea id="order-details" rows="4" placeholder="Flavour, design, size, serving count, dietary requirements…"></textarea>
+            </div>
+          </div>
+          <div class="s-order__form-actions">
+            <button type="button" class="s-order__btn-submit" onclick="submitFormOnly()">Send Request ↗</button>
+            <button type="button" class="s-order__btn-wa" onclick="submitFormAndWhatsApp()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Also Open WhatsApp
+            </button>
+          </div>
+          <div class="s-order__success" id="order-success">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Request received! We'll be in touch within 24 hours to confirm your order.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="o-footer">
+    <div class="o-footer__top">
+      <div data-animate="left">
+        <a href="/" class="o-footer__logo" aria-label="The Dough Knot home">
+          <img src="/brand_assets/DOUGH KNOT LOGO PNG.png" alt="The Dough Knot">
+        </a>
+        <p class="o-footer__tagline">
+          Cakes, desserts &amp; more — handcrafted with love, baked for you in the heart of Dubai.
+        </p>
+      </div>
+      <div data-animate data-delay="100">
+        <p class="o-footer__col-hd">Navigate</p>
+        <div class="o-footer__links">
+          <a href="#about">Our Story</a>
+          <a href="#bestsellers">Best Sellers</a>
+          <a href="#menu">Menu</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#custom">Order a Cake</a>
+        </div>
+      </div>
+      <div data-animate data-delay="200">
+        <p class="o-footer__col-hd">Connect</p>
+        <div class="o-footer__links">
+          <a href="https://www.instagram.com/thedoughknot.ae/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://wa.me/971567894758" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://wa.me/971567894758" target="_blank" rel="noopener">+971 56 789 4758</a>
+        </div>
+      </div>
+    </div>
+    <div class="o-footer__bottom">
+      <p>&copy; 2026 The Dough Knot. All rights reserved. Dubai, UAE.</p>
+      <p>Made with love.</p>
+    </div>
+  </footer>
+
+  <!-- Custom cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ══ GALLERY LIGHTBOX ══ -->
+  <div class="c-lightbox" id="gallery-lightbox" onclick="if(event.target===this)closeLightbox()">
+    <button class="c-lightbox__close" onclick="closeLightbox()" aria-label="Close">✕</button>
+    <button class="c-lightbox__arrow c-lightbox__arrow--prev" onclick="lightboxNav(-1)" aria-label="Previous">‹</button>
+    <div class="c-lightbox__img-wrap">
+      <img class="c-lightbox__img" id="lightbox-img" src="" alt="Gallery photo">
+    </div>
+    <button class="c-lightbox__arrow c-lightbox__arrow--next" onclick="lightboxNav(1)" aria-label="Next">›</button>
+    <div class="c-lightbox__counter" id="lightbox-counter"></div>
+  </div>
+
+  <!-- ══ JAVASCRIPT ══ -->
+  <script>
+    /* ── CUSTOM CURSOR (desktop only) ── */
+    (function() {
+      if (!matchMedia('(pointer: fine)').matches) return;
+      const dot  = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      let mx = -200, my = -200, rx = -200, ry = -200;
+      let rafId;
+
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+      document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
+      document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; });
+
+      document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+      document.addEventListener('mouseup',   () => document.body.classList.remove('cursor-click'));
+
+      // Hover detection — any interactive element
+      document.querySelectorAll('a, button, [role="tab"], input, select, textarea').forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+      });
+
+      function lerp(a, b, t) { return a + (b - a) * t; }
+
+      function tick() {
+        rx = lerp(rx, mx, 0.095);
+        ry = lerp(ry, my, 0.095);
+        dot.style.left  = mx + 'px';
+        dot.style.top   = my + 'px';
+        ring.style.left = rx + 'px';
+        ring.style.top  = ry + 'px';
+        rafId = requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+
+    /* Hero entrance on load */
+    window.addEventListener('load', () => {
+      document.body.classList.add('hero-loaded');
+    });
+
+    /* Nav scroll state + active link highlighting */
+    const nav = document.getElementById('c-nav');
+    const sections = document.querySelectorAll('section[id], section.o-home_section[id]');
+    const navLinks = document.querySelectorAll('.c-nav__links a[href^="#"]');
+
+    const logo = document.querySelector('.c-logo');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY > 60;
+      nav.classList.toggle('is-scrolled', scrolled);
+      if (logo) logo.classList.toggle('is-hidden', scrolled);
+
+      // Active nav link
+      let current = '';
+      sections.forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+      });
+      navLinks.forEach(a => {
+        a.classList.toggle('is-active', a.getAttribute('href') === '#' + current);
+      });
+    }, { passive: true });
+
+    /* ── GALLERY LIGHTBOX ── */
+    let galleryImages = [];
+    let lightboxIdx = 0;
+
+    function openLightbox(idx) {
+      lightboxIdx = idx;
+      const lb = document.getElementById('gallery-lightbox');
+      document.getElementById('lightbox-img').src = galleryImages[idx];
+      document.getElementById('lightbox-counter').textContent = (idx + 1) + ' / ' + galleryImages.length;
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('gallery-lightbox').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function lightboxNav(dir) {
+      lightboxIdx = (lightboxIdx + dir + galleryImages.length) % galleryImages.length;
+      const img = document.getElementById('lightbox-img');
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = galleryImages[lightboxIdx];
+        img.style.opacity = '1';
+        document.getElementById('lightbox-counter').textContent = (lightboxIdx + 1) + ' / ' + galleryImages.length;
+      }, 150);
+    }
+
+    document.addEventListener('keydown', e => {
+      const lb = document.getElementById('gallery-lightbox');
+      if (!lb.classList.contains('is-open')) return;
+      if (e.key === 'Escape')      closeLightbox();
+      if (e.key === 'ArrowRight')  lightboxNav(1);
+      if (e.key === 'ArrowLeft')   lightboxNav(-1);
+    });
+
+    /* Hero slider */
+    const heroSlider = (function() {
+      const DURATION = 5000;
+      let idx = 0, timer, progTimer, progStart, slides, dots, progressBar;
+
+      function build() {
+        slides      = document.querySelectorAll('.o-hero__slide');
+        progressBar = document.getElementById('hero-progress');
+        const dotsEl = document.getElementById('hero-dots');
+        dotsEl.innerHTML = Array.from(slides).map((_,i) =>
+          `<button class="o-hero__dot${i===0?' is-active':''}" onclick="heroSlider.goTo(${i})" aria-label="Slide ${i+1}"></button>`
+        ).join('');
+        dots = document.querySelectorAll('.o-hero__dot');
+        startProgress();
+        timer = setInterval(() => advance(), DURATION);
+      }
+
+      function goTo(n) {
+        slides[idx].classList.remove('is-active');
+        dots[idx]?.classList.remove('is-active');
+        idx = (n + slides.length) % slides.length;
+        /* restart Ken Burns by toggling class */
+        const slide = slides[idx];
+        slide.classList.remove('is-active');
+        void slide.offsetWidth; // reflow
+        slide.classList.add('is-active');
+        dots[idx]?.classList.add('is-active');
+        clearInterval(timer);
+        timer = setInterval(() => advance(), DURATION);
+        startProgress();
+      }
+
+      function advance() { goTo(idx + 1); }
+      function prev() { goTo(idx - 1); }
+
+      function startProgress() {
+        if (!progressBar) return;
+        progressBar.classList.remove('is-running');
+        progressBar.style.width = '0%';
+        void progressBar.offsetWidth;
+        progressBar.style.transitionDuration = DURATION + 'ms';
+        progressBar.classList.add('is-running');
+        progressBar.style.width = '100%';
+      }
+
+      function rebuildSlides(images) {
+        const sliderEl = document.getElementById('hero-slider');
+        sliderEl.innerHTML = images.map((src, i) =>
+          `<div class="o-hero__slide${i===0?' is-active':''}"><img src="${src}" alt="The Dough Knot"></div>`
+        ).join('');
+        clearInterval(timer);
+        idx = 0;
+        build();
+      }
+
+      return { init: build, goTo, prev, next: advance, rebuild: rebuildSlides };
+    })();
+
+    heroSlider.init();
+
+    /* Hero slider parallax — desktop only */
+    const heroSliderEl = document.getElementById('hero-slider');
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
+    if (heroSliderEl && !isMobile) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY < window.innerHeight * 1.2) {
+          heroSliderEl.style.transform = `translateY(${window.scrollY * 0.22}px)`;
+        }
+      }, { passive: true });
+    }
+
+    /* Enable scroll animations (progressive enhancement) */
+    document.body.classList.add('is-animated');
+
+    /* Scroll-triggered animations — trigger sooner on mobile */
+    const observerThreshold = isMobile ? 0.06 : 0.12;
+    const observerMargin    = isMobile ? '0px 0px -20px 0px' : '0px 0px -40px 0px';
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.dataset.delay) || 0;
+          setTimeout(() => entry.target.classList.add('is-visible'), delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: observerThreshold, rootMargin: observerMargin });
+
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+    /* Stagger gallery items on first observe */
+    document.querySelectorAll('.s-gallery__item').forEach((el, i) => {
+      if (!el.dataset.delay) el.dataset.delay = i * 40;
+    });
+
+    /* ── CMS: load content from backend ── */
+    (async function loadCMS() {
+      try {
+        const r = await fetch('/api/content');
+        if (!r.ok) return;
+        const c = await r.json();
+
+        // Hero
+        if (c.hero) {
+          if (c.hero.eyebrow) document.querySelector('.o-hero__eyebrow').textContent = c.hero.eyebrow;
+          if (c.hero.body)    document.querySelector('.o-hero__body').textContent = c.hero.body;
+          if (c.hero.cta)     document.querySelector('.o-hero__cta').textContent = c.hero.cta;
+          // Slider images
+          const slides = (c.hero.slides && c.hero.slides.length) ? c.hero.slides
+                         : c.hero.image ? [c.hero.image] : null;
+          if (slides) heroSlider.rebuild(slides);
+        }
+
+        // About
+        if (c.about) {
+          if (c.about.image1)  document.querySelector('.s-about__ph1').src = c.about.image1;
+          if (c.about.image2)  document.querySelector('.s-about__ph2').src = c.about.image2;
+          if (c.about.label)   document.querySelector('.s-about__text .s-label').textContent = c.about.label;
+          if (c.about.heading) document.querySelector('.s-about__heading').innerHTML = c.about.heading.replace(/\n/g,'<br>');
+          if (c.about.body)    document.querySelector('.s-about__body').textContent = c.about.body;
+        }
+
+        // Hours
+        if (c.hours) {
+          const rows = document.querySelectorAll('.s-hours__row');
+          const hrs = [['row1_label','row1_value'],['row2_label','row2_value'],['row3_label','row3_value']];
+          hrs.forEach(([lk,vk],i) => {
+            if (rows[i] && c.hours[lk]) {
+              rows[i].children[0].textContent = c.hours[lk];
+              rows[i].children[1].textContent = c.hours[vk];
+            }
+          });
+        }
+
+        // Full-bleed
+        if (c.fullbleed && c.fullbleed.image) document.querySelector('.o-fullbleed img').src = c.fullbleed.image;
+
+        // Gallery — fully dynamic
+        if (c.gallery && c.gallery.images && c.gallery.images.length) {
+          const grid = document.getElementById('gallery-grid');
+          if (grid) {
+            galleryImages = c.gallery.images;
+            grid.innerHTML = galleryImages
+              .map((url, i) => `<div class="s-gallery__item" onclick="openLightbox(${i})"><img src="${url}" alt="Gallery photo" loading="lazy"></div>`)
+              .join('');
+            if (document.body.classList.contains('is-animated')) {
+              grid.querySelectorAll('.s-gallery__item').forEach((el, i) => {
+                el.dataset.delay = i * 40;
+                observer.observe(el);
+              });
+            }
+          }
+        }
+
+        // Menu (dynamic render)
+        if (c.menu) {
+          renderMenuFromCMS(c.menu);
+          document.querySelector('.s-menu__note').textContent = c.menu.note || '';
+        }
+
+        // Baker / Founder
+        if (c.baker) {
+          const b = c.baker;
+          if (b.name)   document.getElementById('baker-name').innerHTML = b.name.replace(/\n/g,'<br>');
+          if (b.title)  document.getElementById('baker-title').innerHTML = b.title;
+          if (b.bio)    document.getElementById('baker-bio').textContent = b.bio;
+          if (b.since)  document.getElementById('baker-since').textContent = 'Baking professionally since ' + b.since;
+          if (b.school) document.getElementById('baker-school').textContent = b.school;
+          if (b.lavonne_logo) {
+            const ll = document.getElementById('lavonne-logo');
+            if (ll) { ll.src = b.lavonne_logo; ll.style.display = ''; }
+          }
+        }
+
+        // Testimonials
+        if (c.testimonials && c.testimonials.length) {
+          const grid = document.getElementById('testimonials-grid');
+          if (grid) {
+            grid.innerHTML = c.testimonials.map(t => {
+              if (t.type === 'image' && t.image) {
+                return `<div class="s-tcard s-tcard--img" data-animate="scale">
+                  <img src="${t.image}" alt="${t.name || 'Customer review'}">
+                </div>`;
+              }
+              const stars = t.rating ? '★'.repeat(t.rating) + '☆'.repeat(5 - t.rating) : '★★★★★';
+              return `<div class="s-tcard" data-animate="scale">
+                <span class="s-tcard__quote">"</span>
+                <div class="s-tcard__stars">${stars}</div>
+                <p class="s-tcard__text">${t.text || ''}</p>
+                <p class="s-tcard__name">${t.name || ''}</p>
+              </div>`;
+            }).join('');
+            if (document.body.classList.contains('is-animated')) {
+              grid.querySelectorAll('[data-animate]').forEach((el, i) => {
+                el.dataset.delay = i * 80;
+                observer.observe(el);
+              });
+            }
+          }
+        }
+
+        // Best Sellers
+        if (c.bestsellers && c.bestsellers.length) {
+          const bsGrid = document.getElementById('bestsellers-grid');
+          if (bsGrid) {
+            bsGrid.innerHTML = c.bestsellers.map((b, i) => `
+              <div class="s-bcard" data-animate style="--delay:${i*80}ms">
+                <div class="s-bcard__img-wrap">
+                  <img src="${b.image || ''}" alt="${b.name || ''}" loading="lazy">
+                  ${b.badge ? `<span class="s-bcard__badge">${b.badge}</span>` : ''}
+                </div>
+                <div class="s-bcard__info">
+                  <p class="s-bcard__name">${b.name || ''}</p>
+                  <span class="s-bcard__line"></span>
+                  <p class="s-bcard__desc">${b.desc || ''}</p>
+                </div>
+              </div>`).join('');
+            if (document.body.classList.contains('is-animated')) {
+              bsGrid.querySelectorAll('[data-animate]').forEach((el, i) => {
+                el.dataset.delay = i * 80;
+                observer.observe(el);
+              });
+            }
+          }
+        }
+
+        // Contact links
+        if (c.contact) {
+          const wa = c.contact.whatsapp;
+          const ig = c.contact.instagram;
+          document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
+            if (wa) a.href = 'https://wa.me/' + wa;
+          });
+          document.querySelectorAll('a[href*="instagram.com"]').forEach(a => {
+            if (ig) a.href = 'https://www.instagram.com/' + ig + '/';
+          });
+          // ig link removed from order section — handled via CMS social links above
+        }
+      } catch(e) { /* no API — use static content */ }
+    })();
+
+    function renderMenuFromCMS(menu) {
+      const RESERVED = new Set(['note']);
+      const cats = Object.keys(menu).filter(k => !RESERVED.has(k) && Array.isArray(menu[k]));
+      if (!cats.length) return;
+
+      const tabsEl   = document.querySelector('.s-menu__tabs');
+      const panelsEl = document.querySelector('.s-menu__panels');
+      if (!tabsEl || !panelsEl) return;
+
+      function makeItem(item) {
+        let priceHtml = '';
+        if (item.price6 !== undefined && item.priceSlab !== undefined) {
+          priceHtml = `<div class="s-menu__prices"><span class="s-menu__price">AED ${item.price6}</span><span class="s-menu__price">AED ${item.priceSlab}</span></div>`;
+        } else if (item.price !== undefined) {
+          priceHtml = `<span class="s-menu__price">AED ${item.price}</span>`;
+        }
+        return `<div class="s-menu__item"><div><p class="s-menu__name">${item.name||''}</p><p class="s-menu__desc">${item.desc||''}</p></div>${priceHtml}</div>`;
+      }
+
+      // Rebuild tabs
+      tabsEl.innerHTML = cats.map((cat, i) =>
+        `<button class="s-menu__tab${i===0?' is-active':''}" data-tab="${cat}" role="tab" aria-selected="${i===0}">${cat.charAt(0).toUpperCase()+cat.slice(1)}</button>`
+      ).join('');
+
+      // Rebuild panels
+      const priceHeaders = {
+        brownies: '<div class="s-menu__prices-hdr"><span class="s-menu__price-lbl">6 pcs</span><span class="s-menu__price-lbl">Slab</span></div>',
+        cookies: '<span class="s-menu__price-lbl">4 pcs</span>'
+      };
+      panelsEl.innerHTML = cats.map((cat, i) => {
+        const hdr = priceHeaders[cat] || '<span class="s-menu__price-lbl">Price</span>';
+        const items = menu[cat].map(makeItem).join('');
+        return `<div class="s-menu__panel${i===0?' is-active':''}" id="tab-${cat}">
+          <div class="s-menu__panel-header"><span></span>${hdr}</div>
+          ${items}
+        </div>`;
+      }).join('');
+
+      // Re-bind tab clicks
+      tabsEl.querySelectorAll('.s-menu__tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabsEl.querySelectorAll('.s-menu__tab').forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected','false'); });
+          panelsEl.querySelectorAll('.s-menu__panel').forEach(p => p.classList.remove('is-active'));
+          tab.classList.add('is-active'); tab.setAttribute('aria-selected','true');
+          const p = panelsEl.querySelector('#tab-'+tab.dataset.tab);
+          if (p) p.classList.add('is-active');
+          trackEvent('menu_tab', tab.dataset.tab);
+        });
+      });
+    }
+
+    /* ── ANALYTICS: track events ── */
+    function trackEvent(type, data) {
+      fetch('/api/analytics/event', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({type, data}),
+        keepalive: true
+      }).catch(()=>{});
+    }
+
+    // Page view
+    trackEvent('pageview', {path: location.pathname, referrer: document.referrer});
+
+    // Track clicks on key elements
+    document.querySelectorAll('.o-hero__cta, .s-order__opt--wa, .c-nav__social a').forEach(el => {
+      el.addEventListener('click', () => {
+        trackEvent('click', el.getAttribute('aria-label') || el.textContent.trim().slice(0,40));
+      });
+    });
+
+    // Track menu tab clicks
+    document.querySelectorAll('.s-menu__tab').forEach(tab => {
+      tab.addEventListener('click', () => trackEvent('menu_tab', tab.dataset.tab));
+    });
+
+    /* Menu tab clicks are bound inside renderMenuFromCMS */
+
+    /* ── MOBILE MENU ── */
+    function toggleMobileMenu() {
+      const burger = document.getElementById('c-nav-burger');
+      const drawer = document.getElementById('c-nav-drawer');
+      const open = drawer.classList.toggle('is-open');
+      burger.classList.toggle('is-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    function closeMobileMenu() {
+      document.getElementById('c-nav-burger').classList.remove('is-open');
+      document.getElementById('c-nav-drawer').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    /* ── ORDER FORM: toggle, save, WhatsApp ── */
+    let formOpen = false;
+    function toggleOrderForm() {
+      formOpen = !formOpen;
+      const wrap = document.getElementById('order-form-wrap');
+      const btn  = document.getElementById('form-toggle');
+      wrap.classList.toggle('is-open', formOpen);
+      btn.querySelector('.s-order__opt-title').textContent = formOpen ? 'Hide the Form' : 'Submit a Request';
+      if (formOpen) {
+        setTimeout(() => wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 120);
+      }
+    }
+
+    function _collectForm() {
+      return {
+        name:      document.getElementById('order-name').value.trim(),
+        phone:     document.getElementById('order-phone').value.trim(),
+        occasion:  document.getElementById('order-occasion').value,
+        date:      document.getElementById('order-date').value,
+        details:   document.getElementById('order-details').value.trim(),
+      };
+    }
+
+    function _validateForm(d) {
+      if (!d.name || !d.details) {
+        alert('Please fill in at least your name and order details.');
+        return false;
+      }
+      return true;
+    }
+
+    async function _saveToBackend(d) {
+      try {
+        await fetch('/api/orders', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: d.name, phone: d.phone, occasion: d.occasion, date_needed: d.date, details: d.details }),
+          keepalive: true,
+        });
+      } catch(e) {}
+    }
+
+    function _buildWAMsg(d) {
+      let msg = "Hi The Dough Knot! I'd like to place a custom order \uD83C\uDF82\n\n";
+      if (d.name)    msg += "Name: "        + d.name    + "\n";
+      if (d.phone)   msg += "Phone: "       + d.phone   + "\n";
+      if (d.occasion) msg += "Occasion: "   + d.occasion + "\n";
+      if (d.date)    msg += "Date needed: " + d.date     + "\n";
+      if (d.details) msg += "\nDetails:\n"  + d.details;
+      return msg;
+    }
+
+    function _showSuccess() {
+      const el = document.getElementById('order-success');
+      el.classList.add('is-visible');
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    async function submitFormOnly() {
+      const d = _collectForm();
+      if (!_validateForm(d)) return;
+      await _saveToBackend(d);
+      trackEvent('order_submit', { name: d.name, occasion: d.occasion });
+      document.getElementById('order-form').reset();
+      _showSuccess();
+    }
+
+    async function submitFormAndWhatsApp() {
+      const d = _collectForm();
+      if (!_validateForm(d)) return;
+      await _saveToBackend(d);
+      trackEvent('order_submit_wa', { name: d.name, occasion: d.occasion });
+      document.getElementById('order-form').reset();
+      _showSuccess();
+      window.open('https://wa.me/971567894758?text=' + encodeURIComponent(_buildWAMsg(d)), '_blank');
+    }
+  </script>
+
+  <!-- ══ FLOATING ORDER CTA ══ -->
+  <a href="#custom" class="c-order-float" aria-label="Place an order" onclick="event.preventDefault(); document.getElementById('custom').scrollIntoView({behavior:'smooth'})">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    Order Now
+  </a>
+
+</body>
+</html>

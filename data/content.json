@@ -1,0 +1,288 @@
+{
+  "hero": {
+    "eyebrow": "Cakes, Desserts & More · Dubai, UAE",
+    "body": "Every bite handcrafted with love — from showstopping celebration cakes to the perfect everyday indulgence.",
+    "cta": "View Our Menu",
+    "image": "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.01%20PM.jpeg",
+    "slides": [
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.01%20PM.jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.12%20PM%20(4).jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.11%20PM.jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.09%20PM.jpeg"
+    ]
+  },
+  "about": {
+    "label": "Our Story",
+    "heading": "Every bite, \nthoughtfully made",
+    "body": "The Dough Knot began as a passion project in a home kitchen — a love for baking that slowly grew into something much more meaningful. What started with a handful of recipes and the joy of creating for family and friends has now become a space where creativity, precision, and passion come together.\n\nEvery cake, cookie, and pastry is handcrafted to order, ensuring freshness and a personal touch in every detail. From carefully selected ingredients to thoughtfully designed finishes, everything is made with intention — because great baking is never rushed.\n\nAt The Dough Knot, it’s not just about desserts. It’s about creating moments, celebrating occasions, and bringing people together over something truly special.\n\nEvery bite tells a story. Every creation is made with care.\nBecause you deserve nothing less than the best.",
+    "image1": "/brand_assets/uploads/b2e9a78bc5f54dc6ac9b2ed35fd90381.jpeg",
+    "image2": "/brand_assets/uploads/eccfb2a0586e4026810abd3403ad8b21.jpeg"
+  },
+  "hours": {
+    "row1_label": "Monday – Friday",
+    "row1_value": "9:00 AM – 8:00 PM",
+    "row2_label": "Saturday",
+    "row2_value": "9:00 AM – 9:00 PM",
+    "row3_label": "Sunday",
+    "row3_value": "10:00 AM – 6:00 PM"
+  },
+  "fullbleed": {
+    "image": "/brand_assets/uploads/c3874def742243e796f83c06135b140e.jpeg"
+  },
+  "gallery": {
+    "images": [
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.01%20PM.jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.04%20PM.jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.05%20PM%20(2).jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.11%20PM.jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.02%20PM.jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.01%20PM%20(4).jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.05%20PM.jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.10%20PM.jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.04%20PM%20(4).jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.12%20PM.jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.06%20PM%20(1).jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.12%20PM%20(3).jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.12%20PM%20(4).jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.01%20PM%20(2).jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.01%20PM%20(3).jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.03%20PM%20(2).jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.03%20PM%20(3).jpeg",
+      "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.06%20PM%20(2).jpeg",
+      "/brand_assets/Images/WhatsApp Image 2026-03-26 at 5.13.59 PM (1).jpeg",
+      "/brand_assets/Images/WhatsApp Image 2026-03-26 at 5.14.05 PM (3).jpeg",
+      "/brand_assets/uploads/eccfb2a0586e4026810abd3403ad8b21.jpeg",
+      "/brand_assets/Images/WhatsApp Image 2026-03-26 at 5.14.09 PM (2).jpeg",
+      "/brand_assets/Images/WhatsApp Image 2026-03-26 at 5.14.03 PM.jpeg",
+      "/brand_assets/Images/WhatsApp Image 2026-03-26 at 5.14.04 PM (2).jpeg",
+      "/brand_assets/Images/WhatsApp Image 2026-03-26 at 5.13.59 PM.jpeg",
+      "/brand_assets/Images/WhatsApp Image 2026-03-26 at 5.14.12 PM (1).jpeg"
+    ]
+  },
+  "menu": {
+    "note": "All items baked fresh daily. Custom orders available with 48 hours notice.",
+    "brownies": [
+      {
+        "name": "Nutella Brownies",
+        "desc": "Rich fudgy brownies swirled with creamy Nutella — an irresistible chocolate fix",
+        "price6": 50,
+        "priceSlab": 120
+      },
+      {
+        "name": "Fudge Brownies",
+        "desc": "Ultimate chocolate indulgence — intensely chocolatey, timeless, and never fails to delight",
+        "price6": 40,
+        "priceSlab": 110
+      },
+      {
+        "name": "Red Velvet Cheesecake Brownies",
+        "desc": "Moist red velvet base topped with silky smooth cheesecake — visually stunning and delicious",
+        "price6": 50,
+        "priceSlab": 120
+      },
+      {
+        "name": "Hazelnut Brownies",
+        "desc": "Rich fudgy brownies packed with crunchy hazelnuts — a perfect balance of texture and flavour",
+        "price6": 60,
+        "priceSlab": 130
+      },
+      {
+        "name": "Roasted Almond Brownies",
+        "desc": "Fudgy brownies loaded with roasted almonds — a sophisticated twist on a classic",
+        "price6": 40,
+        "priceSlab": 110
+      },
+      {
+        "name": "Chocolate Cheesecake Brownies",
+        "desc": "Rich fudgy brownies layered with decadent chocolate cheesecake — pure indulgence",
+        "price6": 60,
+        "priceSlab": 130
+      },
+      {
+        "name": "Lotus Biscoff Brownies",
+        "desc": "Sweet caramelised Lotus Biscoff swirled into rich fudgy brownies — a delightfully unexpected treat",
+        "price6": 50,
+        "priceSlab": 120
+      }
+    ],
+    "cakes": [
+      {
+        "name": "White Chocolate Raspberry Cake",
+        "desc": "Vanilla sponge, white chocolate ganache, tangy raspberry compote, finished with fresh raspberries",
+        "price": 180
+      },
+      {
+        "name": "Belgian Chocolate Cake",
+        "desc": "Dense, fudgy sponge with premium Belgian chocolate enveloped in velvety chocolate ganache",
+        "price": 200
+      },
+      {
+        "name": "Ferrero Rocher Cake",
+        "desc": "Hazelnut-chocolate sponge, Nutella cream, roasted hazelnuts, coated in decadent chocolate ganache",
+        "price": 160
+      },
+      {
+        "name": "Cookies & Cream Cake",
+        "desc": "Oreo-infused frosting, crushed cookies, and white Oreos — a nostalgic favourite",
+        "price": 140
+      },
+      {
+        "name": "Reese's Chocolate Cake",
+        "desc": "Chocolate cake, creamy peanut butter filling, rich chocolate ganache, topped with Reese's Pieces",
+        "price": 180
+      },
+      {
+        "name": "Almond Nutella Cake",
+        "desc": "Almond sponge, Nutella filling, roasted almonds, and Nutella buttercream — sweet and crunchy",
+        "price": 140
+      },
+      {
+        "name": "Truffle Chocolate Cake",
+        "desc": "Dense chocolate layers, glossy chocolate glaze adorned with hand-rolled chocolate truffles",
+        "price": 120
+      },
+      {
+        "name": "Matilda Chocolate Cake",
+        "desc": "Rich moist chocolate sponge, luscious chocolate fudge filling, thick chocolate frosting — every chocoholic's fantasy",
+        "price": 150
+      },
+      {
+        "name": "Lotus Biscoff Cake",
+        "desc": "Vanilla sponge layered with Biscoff spread and buttercream, topped with crushed Biscoff",
+        "price": 140
+      },
+      {
+        "name": "Rafaello White Chocolate Cake",
+        "desc": "Light coconut sponge, white chocolate-almond filling, white chocolate frosting — elegant and refined",
+        "price": 140
+      },
+      {
+        "name": "Tiramisu Cake",
+        "desc": "Coffee-soaked sponge, creamy mascarpone filling, dusted with cocoa — a decadent Italian classic",
+        "price": 150
+      },
+      {
+        "name": "Salted Caramel Cake",
+        "desc": "Vanilla sponge, rich salted caramel filling, caramel drizzle — the perfect sweet and savoury balance",
+        "price": 110
+      },
+      {
+        "name": "Caramel Crunch Cake",
+        "desc": "Caramel sponge, crunchy caramel pieces, caramel cream and sugar shards — a sweet, crunchy indulgence",
+        "price": 130
+      },
+      {
+        "name": "Hazelnut Praline Cake",
+        "desc": "Hazelnut sponge, smooth praline filling, chocolate ganache, topped with toasted hazelnuts",
+        "price": 150
+      },
+      {
+        "name": "Victoria Sandwich Cake",
+        "desc": "Classic light vanilla sponge, strawberry jam, vanilla cream, dusted with powdered sugar",
+        "price": 100
+      }
+    ],
+    "cookies": [
+      {
+        "name": "Chocolate Chip Filled Cookies",
+        "desc": "Gooey melted chocolate chip centre that will tantalize your taste buds",
+        "price": 30
+      },
+      {
+        "name": "Double Chocolate Filled Cookies",
+        "desc": "Rich, irresistible cookies packed with a double dose of decadent chocolate",
+        "price": 35
+      },
+      {
+        "name": "Brookies",
+        "desc": "The best of both worlds — fudgy brownie meets chewy cookie in one heavenly treat",
+        "price": 25
+      },
+      {
+        "name": "Dulce De Leche Cookies",
+        "desc": "Creamy caramelised dulce de leche filling — perfect paired with a sweet latte",
+        "price": 30
+      },
+      {
+        "name": "Red Velvet Cookies",
+        "desc": "Soft chewy red velvet cookies with a hint of cocoa and white chocolate",
+        "price": 15
+      },
+      {
+        "name": "Butter Cookies",
+        "desc": "Timeless, classic — perfectly crisp and buttery, melts in your mouth with every bite",
+        "price": 15
+      },
+      {
+        "name": "Salted Caramel Pecan Cookies",
+        "desc": "Irresistible sweet-salty cookies filled with luscious caramel and crunchy pecans",
+        "price": 35
+      }
+    ]
+  },
+  "contact": {
+    "whatsapp": "971567894758",
+    "instagram": "thedoughknot.ae"
+  },
+  "baker": {
+    "name": "Naurah\nNafeesa",
+    "title": "Pastry Chef &amp; Founder",
+    "bio": "Naurah Nafeesa is a passionate and experienced baker whose love for pastry turned into a lifelong craft. A graduate of the prestigious Lavonne Academy of Baking Science and Pastry Arts in Bangalore, India, she has been creating extraordinary baked goods professionally since 2017 — first in India, and now bringing her expertise and heart to Dubai through The Dough Knot.",
+    "since": "2017",
+    "school": "Lavonne Academy of Baking Science and Pastry Arts",
+    "lavonne_logo": "https://www.lavonne.in/wp-content/uploads/2018/03/lavonne-logo-white.png",
+    "photo": ""
+  },
+  "testimonials": [
+    {
+      "type": "text",
+      "name": "Sarah M.",
+      "text": "Ordered a birthday cake and it was absolutely stunning — the taste was even better than the look. Everyone at the party was asking where it came from!",
+      "rating": 5
+    },
+    {
+      "type": "text",
+      "name": "Fatima A.",
+      "text": "The brownies are addictive! We've ordered three times already. The Nutella ones are our family's favourite. Always fresh, always perfect.",
+      "rating": 5
+    },
+    {
+      "type": "text",
+      "name": "Lara K.",
+      "text": "Naurah made the most beautiful wedding dessert table for us. Every single item was delicious and the presentation was flawless. Highly recommend!",
+      "rating": 5
+    }
+  ],
+  "bestsellers": [
+    {
+      "badge": "Best Seller",
+      "desc": "Rich, fudgy, and indulgent — available in Nutella, Hazelnut, Lotus Biscoff & more.",
+      "image": "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.03%20PM%20(2).jpeg",
+      "name": "Brownies"
+    },
+    {
+      "badge": "Best Seller",
+      "desc": "Gooey centres, perfectly crisp edges — chocolate chip, double choc, red velvet & more.",
+      "image": "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.06%20PM.jpeg",
+      "name": "Cookies"
+    },
+    {
+      "badge": "Customer Fave",
+      "desc": "Pillowy soft filled doughnuts, rolled in sugar, topped with cream and fresh fruit.",
+      "image": "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.09%20PM.jpeg",
+      "name": "Berliners"
+    },
+    {
+      "name": "Milk Cakes",
+      "desc": "Dreamy white cream, rose petals & pistachio — elegant, light, and utterly irresistible.",
+      "badge": "Signature",
+      "image": "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.12%20PM%20(2).jpeg"
+    },
+    {
+      "badge": "Signature",
+      "desc": "Vanilla sponge, white chocolate ganache & fresh raspberries — the showstopper.",
+      "image": "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.01%20PM.jpeg",
+      "name": "White Chocolate Raspberry Cake"
+    }
+  ]
+}

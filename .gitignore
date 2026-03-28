@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+temporary screenshots/
+artsdistrictkitchen.com_.png
+background-paths-demo.html
+node_modules/
+.DS_Store
+.claude/
+data/doughknot.db
