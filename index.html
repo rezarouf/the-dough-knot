@@ -1031,7 +1031,8 @@
       transition: border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
       cursor: pointer; position: relative; overflow: hidden;
       text-align: left; width: 100%;
-      font-family: inherit;
+      font-family: 'Montserrat', 'Inter', sans-serif;
+      font-size: clamp(14px, 1vw, 18px); line-height: 1.6;
       color: var(--c-cream);
       text-decoration: none; -webkit-appearance: none; appearance: none;
     }
@@ -1059,11 +1060,11 @@
 
     .s-order__opt-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.5rem; font-weight: 700;
+      font-size: 1.6em; font-weight: 700;
       color: var(--c-cream); letter-spacing: -0.01em;
     }
     .s-order__opt-desc {
-      font-size: 1rem; font-weight: 300; line-height: 1.78;
+      font-size: 1em; font-weight: 300; line-height: 1.78;
       color: var(--c-muted);
     }
 
@@ -1417,7 +1418,8 @@
       .s-order__body { font-size: 0.88em; }
       .s-order__opts { grid-template-columns: 1fr; gap: 3vw; }
       .s-order__opt { padding: 2.4em 2em; border-radius: 0.6em; }
-      .s-order__opt-title { font-size: 1.25rem; }
+      .s-order__opt { font-size: clamp(14px, 4vw, 17px); }
+      .s-order__opt-title { font-size: 1.5em; }
       .s-order__form-grid { grid-template-columns: 1fr; }
       .s-order__form-grid .s-order__field--full { grid-column: 1; }
       .s-order__form-inner { padding: 2em 1.6em 2.4em; }
