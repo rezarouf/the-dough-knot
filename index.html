@@ -449,6 +449,7 @@
       letter-spacing: -0.02em; margin-bottom: 0.5em;
     }
     .s-section-heading em { font-style: italic; color: var(--c-gold); }
+    .s-about__heading em, .s-baker__name em { font-style: italic; color: var(--c-gold); }
 
     .s-about__heading {
       font-family: 'Playfair Display', serif;
@@ -486,9 +487,10 @@
 
     .s-menu__title {
       font-family: 'Playfair Display', serif;
-      font-size: 9vw; font-weight: 900; text-transform: uppercase;
-      letter-spacing: -0.03em; color: var(--c-cream); line-height: 1;
+      font-size: clamp(2.4rem, 3.2vw, 4rem); font-weight: 800; text-transform: uppercase;
+      letter-spacing: -0.02em; color: var(--c-cream); line-height: 1.1;
     }
+    .s-menu__title em { font-style: italic; color: var(--c-gold); }
 
     .s-menu__note {
       font-size: 0.82em; font-weight: 300; color: var(--c-muted);
@@ -1057,11 +1059,11 @@
 
     .s-order__opt-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.3em; font-weight: 700;
+      font-size: 1.55em; font-weight: 700;
       color: var(--c-cream); letter-spacing: -0.01em;
     }
     .s-order__opt-desc {
-      font-size: 0.82em; font-weight: 300; line-height: 1.75;
+      font-size: 0.95em; font-weight: 300; line-height: 1.78;
       color: var(--c-muted);
     }
 
@@ -1348,7 +1350,7 @@
       /* ── MENU ── */
       .s-menu { padding: 0 5vw; }
       .s-menu__hd { flex-direction: column; align-items: flex-start; gap: 1.2em; padding-bottom: 8vw; }
-      .s-menu__title { font-size: clamp(3rem, 13vw, 6rem); }
+      .s-menu__title { font-size: clamp(2rem, 9vw, 3.2rem); }
       .s-menu__note { text-align: left; max-width: 100%; font-size: 0.82em; }
       .s-menu__tabs { gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; position: relative; }
       .s-menu__tabs::-webkit-scrollbar { display: none; }

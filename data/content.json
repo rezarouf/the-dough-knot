@@ -258,7 +258,51 @@
       "rating": 5
     }
   ],
-  "workshops": [],
+  "workshops": [
+    {
+      "title": "Chocolate Cake Masterclass",
+      "date": "February 14, 2026",
+      "desc": "A hands-on class covering layering, ganache, and finishing techniques for showstopping chocolate cakes. Students took home their own creation.",
+      "image": "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.01%20PM.jpeg",
+      "tag": "past",
+      "photos": [
+        "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.01%20PM.jpeg",
+        "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.03%20PM%20(2).jpeg",
+        "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.04%20PM.jpeg",
+        "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.06%20PM.jpeg"
+      ]
+    },
+    {
+      "title": "Cookie Decorating Workshop",
+      "date": "March 8, 2026",
+      "desc": "Learnt royal icing, flooding, and creative decorating techniques on freshly baked butter cookies. A fun session for all skill levels.",
+      "image": "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.06%20PM.jpeg",
+      "tag": "past",
+      "photos": [
+        "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.06%20PM.jpeg",
+        "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.05%20PM.jpeg",
+        "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.07%20PM.jpeg"
+      ]
+    },
+    {
+      "title": "Celebration Cake Workshop",
+      "date": "April 20, 2026",
+      "desc": "Learn to build, fill, and decorate a 2-tier celebration cake from scratch. Covers buttercream, fondant accents, and personalisation techniques. Take your cake home!",
+      "image": "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.12%20PM%20(4).jpeg",
+      "tag": "upcoming",
+      "price": "380",
+      "spots": "6"
+    },
+    {
+      "title": "Brownie & Cookie Bake-Along",
+      "date": "May 3, 2026",
+      "desc": "A relaxed hands-on session baking fudgy brownies and gooey cookies. Perfect for beginners and gifting season. All ingredients and packaging included.",
+      "image": "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.09%20PM.jpeg",
+      "tag": "upcoming",
+      "price": "250",
+      "spots": "8"
+    }
+  ],
   "bestsellers": [
     {
       "badge": "Best Seller",
