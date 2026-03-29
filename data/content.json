@@ -3,6 +3,11 @@
     "eyebrow": "Cakes, Desserts & More · Dubai, UAE",
     "body": "Every bite handcrafted with love — from showstopping celebration cakes to the perfect everyday indulgence.",
     "cta": "View Our Menu",
+    "line1": "Made to",
+    "line2": "Order,",
+    "line3": "Baked",
+    "line4": "with",
+    "line5": "Love.",
     "image": "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.01%20PM.jpeg",
     "slides": [
       "/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.01%20PM.jpeg",
@@ -253,10 +258,7 @@
       "rating": 5
     }
   ],
-  "workshops": {
-    "previous": [],
-    "upcoming": []
-  },
+  "workshops": [],
   "bestsellers": [
     {
       "badge": "Best Seller",

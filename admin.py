@@ -321,52 +321,71 @@ def delete_bestseller(idx):
 @app.route('/api/workshops', methods=['GET'])
 def get_workshops():
     c = load_content()
-    return jsonify(c.get('workshops', {'previous': [], 'upcoming': []}))
+    return jsonify(c.get('workshops', []))
 
-@app.route('/api/workshops/previous', methods=['PUT'])
+@app.route('/api/workshops', methods=['PUT'])
 @requires_auth
-def put_workshops_previous():
+def put_workshops():
     data = request.get_json(silent=True) or []
     c = load_content()
-    if 'workshops' not in c:
-        c['workshops'] = {'previous': [], 'upcoming': []}
-    c['workshops']['previous'] = data
+    c['workshops'] = data
     save_content(c)
     return jsonify({'ok': True})
 
-@app.route('/api/workshops/upcoming', methods=['PUT'])
+@app.route('/api/workshops/<int:idx>', methods=['DELETE'])
 @requires_auth
-def put_workshops_upcoming():
-    data = request.get_json(silent=True) or []
+def delete_workshop(idx):
     c = load_content()
-    if 'workshops' not in c:
-        c['workshops'] = {'previous': [], 'upcoming': []}
-    c['workshops']['upcoming'] = data
-    save_content(c)
-    return jsonify({'ok': True})
-
-@app.route('/api/workshops/previous/<int:idx>', methods=['DELETE'])
-@requires_auth
-def delete_workshop_previous(idx):
-    c = load_content()
-    items = c.get('workshops', {}).get('previous', [])
+    items = c.get('workshops', [])
     if 0 <= idx < len(items):
         items.pop(idx)
-    if 'workshops' in c:
-        c['workshops']['previous'] = items
+    c['workshops'] = items
     save_content(c)
     return jsonify({'ok': True})
 
-@app.route('/api/workshops/upcoming/<int:idx>', methods=['DELETE'])
+# ── REGISTRATIONS ──
+def init_registrations_db():
+    conn = sqlite3.connect(DB_PATH)
+    conn.execute('''CREATE TABLE IF NOT EXISTS workshop_registrations (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        workshop_name TEXT,
+        name TEXT,
+        phone TEXT,
+        email TEXT,
+        notes TEXT,
+        created_at TEXT DEFAULT (datetime('now'))
+    )''')
+    conn.commit()
+    conn.close()
+
+init_registrations_db()
+
+@app.route('/api/registrations', methods=['GET'])
 @requires_auth
-def delete_workshop_upcoming(idx):
-    c = load_content()
-    items = c.get('workshops', {}).get('upcoming', [])
-    if 0 <= idx < len(items):
-        items.pop(idx)
-    if 'workshops' in c:
-        c['workshops']['upcoming'] = items
-    save_content(c)
+def get_registrations():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    rows = conn.execute('SELECT * FROM workshop_registrations ORDER BY created_at DESC').fetchall()
+    conn.close()
+    return jsonify([dict(r) for r in rows])
+
+@app.route('/api/registrations', methods=['POST'])
+def post_registration():
+    d = request.get_json(silent=True) or {}
+    conn = sqlite3.connect(DB_PATH)
+    conn.execute('INSERT INTO workshop_registrations (workshop_name, name, phone, email, notes) VALUES (?,?,?,?,?)',
+        (d.get('workshop_name',''), d.get('name',''), d.get('phone',''), d.get('email',''), d.get('notes','')))
+    conn.commit()
+    conn.close()
+    return jsonify({'ok': True})
+
+@app.route('/api/registrations/<int:reg_id>', methods=['DELETE'])
+@requires_auth
+def delete_registration(reg_id):
+    conn = sqlite3.connect(DB_PATH)
+    conn.execute('DELETE FROM workshop_registrations WHERE id=?', (reg_id,))
+    conn.commit()
+    conn.close()
     return jsonify({'ok': True})
 
 

@@ -441,6 +441,15 @@
       text-transform: uppercase; color: var(--c-pink); margin-bottom: 1.4em;
     }
 
+    /* ── UNIFIED SECTION HEADING ── */
+    .s-section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 3.2vw, 4rem); font-weight: 800; line-height: 1.1;
+      text-transform: uppercase; color: var(--c-cream);
+      letter-spacing: -0.02em; margin-bottom: 0.5em;
+    }
+    .s-section-heading em { font-style: italic; color: var(--c-gold); }
+
     .s-about__heading {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2.4rem, 3.2vw, 4rem); font-weight: 800; line-height: 1.1;
@@ -796,6 +805,7 @@
       font-weight: 800; line-height: 1.05;
       letter-spacing: -0.02em; color: var(--c-cream);
       margin-bottom: 0.5em;
+      text-transform: uppercase;
     }
     .s-bestsellers__sub {
       font-size: 0.88em; font-weight: 300; color: var(--c-muted);
@@ -1016,10 +1026,12 @@
       border: 1px solid var(--c-gold-dim);
       padding: 3.2em 3.4em;
       display: flex; flex-direction: column; gap: 1.2em;
-      transition: border-color 0.4s ease, background 0.4s ease,
-                  box-shadow 0.4s ease;
+      transition: border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
       cursor: pointer; position: relative; overflow: hidden;
       text-align: left; width: 100%;
+      font-family: 'Montserrat', 'Inter', sans-serif;
+      font-size: 1rem; color: var(--c-cream);
+      text-decoration: none; -webkit-appearance: none; appearance: none;
     }
     .s-order__opt::before {
       content: ''; position: absolute; inset: 0;
@@ -1700,10 +1712,10 @@
     <p class="o-hero__eyebrow">Cakes, Desserts &amp; More · Dubai, UAE</p>
     <div class="o-hero__content">
       <h1 class="o-hero__title">
-        <span class="word-wrap"><span class="word" style="animation-delay:0.05s">Made to</span></span><br>
-        <em><span class="word-wrap"><span class="word" style="animation-delay:0.18s">Order,</span></span></em><br>
-        <span class="word-wrap"><span class="word" style="animation-delay:0.30s">Baked</span></span><br>
-        <span class="word-wrap"><span class="word" style="animation-delay:0.42s">with </span></span><em><span class="word-wrap"><span class="word" style="animation-delay:0.48s">Love.</span></span></em>
+        <span class="word-wrap"><span class="word" id="hero-line1" style="animation-delay:0.05s">Made to</span></span><br>
+        <em><span class="word-wrap"><span class="word" id="hero-line2" style="animation-delay:0.18s">Order,</span></span></em><br>
+        <span class="word-wrap"><span class="word" id="hero-line3" style="animation-delay:0.30s">Baked</span></span><br>
+        <span class="word-wrap"><span class="word" id="hero-line4" style="animation-delay:0.42s">with</span></span><em style="margin-left:0.22em"><span class="word-wrap"><span class="word" id="hero-line5" style="animation-delay:0.48s">Love.</span></span></em>
       </h1>
       <p class="o-hero__body">
         Every bite handcrafted with love — from showstopping celebration cakes to the perfect everyday indulgence.
@@ -1743,7 +1755,7 @@
   <section class="o-home_section s-bestsellers" id="bestsellers">
     <div class="s-bestsellers__hd" data-animate="fade">
       <p class="s-label">Fan Favourites</p>
-      <h2 class="s-bestsellers__title">Our Best Sellers</h2>
+      <h2 class="s-bestsellers__title s-section-heading">Our<br><em>Best Sellers</em></h2>
       <p class="s-bestsellers__sub">The creations our customers keep coming back for — handcrafted fresh, every single time.</p>
     </div>
     <div class="s-bestsellers__grid" id="bestsellers-grid">
@@ -1845,7 +1857,10 @@
   <!-- ══ MENU ══ -->
   <section class="o-home_section s-menu" id="menu">
     <div class="s-menu__hd" data-animate="fade">
-      <h2 class="s-menu__title">Menu</h2>
+      <div>
+        <p class="s-label" style="margin-bottom:0.6em">The Menu</p>
+        <h2 class="s-menu__title">Our<br><em style="font-style:italic;color:var(--c-gold)">Menu</em></h2>
+      </div>
       <p class="s-menu__note">All items baked fresh daily. Custom orders available with 48 hours notice.</p>
     </div>
 
@@ -2012,7 +2027,10 @@
   <!-- ══ GALLERY ══ -->
   <section class="o-home_section s-gallery" id="gallery">
     <div class="s-gallery__header">
-      <p class="s-label" style="margin-bottom:0;" data-animate>Our Work</p>
+      <div data-animate>
+        <p class="s-label" style="margin-bottom:0.6em">Our Work</p>
+        <h2 class="s-section-heading" style="margin-bottom:0">The<br><em>Gallery</em></h2>
+      </div>
       <a href="https://www.instagram.com/thedoughknot.ae/" target="_blank" rel="noopener" class="s-gallery__viewall" data-animate="right">@thedoughknot.ae ↗</a>
     </div>
     <div class="s-gallery__grid" id="gallery-grid" data-animate="fade"></div>
@@ -2022,7 +2040,7 @@
   <section class="o-home_section s-testimonials" id="testimonials">
     <div class="s-testimonials__hd" data-animate="fade">
       <p class="s-label">Happy Customers</p>
-      <h2 class="s-testimonials__title">What They're<br><em style="color:var(--c-pink);font-style:italic">Saying</em></h2>
+      <h2 class="s-testimonials__title s-section-heading">What They're<br><em>Saying</em></h2>
     </div>
     <div class="s-testimonials__grid" id="testimonials-grid"></div>
   </section>
@@ -2031,7 +2049,7 @@
   <section class="o-home_section s-workshops" id="workshops">
     <div class="s-workshops__hd" data-animate="fade">
       <p class="s-label">Baking Classes</p>
-      <h2 class="s-workshops__heading">Workshops</h2>
+      <h2 class="s-workshops__heading s-section-heading">Our<br><em>Workshops</em></h2>
     </div>
     <div class="s-workshops__group" id="workshops-prev-group">
       <p class="s-workshops__group-title">Previous Workshops</p>
@@ -2046,7 +2064,10 @@
   <!-- Workshop images modal -->
   <div class="c-wimg-modal" id="wimg-modal" onclick="if(event.target===this)closeWimgModal()">
     <div class="c-wimg-modal__header">
-      <p class="c-wimg-modal__title" id="wimg-modal-title"></p>
+      <div>
+        <p class="c-wimg-modal__title" id="wimg-modal-title"></p>
+        <p id="wimg-modal-desc" style="font-size:0.8em;color:rgba(232,212,192,0.55);margin-top:0.3em;font-weight:300"></p>
+      </div>
       <button class="c-wimg-modal__close" onclick="closeWimgModal()">✕</button>
     </div>
     <div class="c-wimg-modal__grid" id="wimg-modal-grid"></div>
@@ -2323,13 +2344,15 @@
     });
 
     /* ── WORKSHOP MODALS ── */
-    function openWimgModal(name, images) {
+    function openWimgModal(name, images, desc) {
       document.getElementById('wimg-modal-title').textContent = name;
-      document.getElementById('wimg-modal-grid').innerHTML = images.map((url, i) =>
+      const descEl = document.getElementById('wimg-modal-desc');
+      if (descEl) descEl.textContent = desc || '';
+      document.getElementById('wimg-modal-grid').innerHTML = (images||[]).filter(Boolean).map((url, i) =>
         `<div class="c-wimg-modal__item" onclick="openLightbox_w(${i})" data-url="${url}">
           <img src="${url}" alt="${name}" loading="lazy">
         </div>`).join('');
-      _wimgImages = images;
+      _wimgImages = (images||[]).filter(Boolean);
       document.getElementById('wimg-modal').classList.add('is-open');
       document.body.style.overflow = 'hidden';
     }
@@ -2343,12 +2366,12 @@
       openLightbox(idx);
     }
 
-    let _wregName = '', _wregDate = '';
-    function openWregModal(name, date) {
-      _wregName = name; _wregDate = date;
+    let _wregName = '', _wregDate = '', _wregPrice = '';
+    function openWregModal(name, date, price) {
+      _wregName = name; _wregDate = date; _wregPrice = price;
       document.getElementById('wreg-workshop-name').textContent = name;
-      document.getElementById('wreg-workshop-date').textContent = date;
-      ['wreg-name','wreg-phone','wreg-email','wreg-notes'].forEach(id => { document.getElementById(id).value = ''; });
+      document.getElementById('wreg-workshop-date').textContent = date + (price ? ' · AED ' + price : '');
+      ['wreg-name','wreg-phone','wreg-email','wreg-notes'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
       document.getElementById('wreg-modal').classList.add('is-open');
       document.body.style.overflow = 'hidden';
     }
@@ -2362,7 +2385,13 @@
       const email = document.getElementById('wreg-email').value.trim();
       const notes = document.getElementById('wreg-notes').value.trim();
       if (!name || !phone) { alert('Please enter your name and WhatsApp number.'); return; }
-      const msg = `Hi! I'd like to register for the *${_wregName}* workshop (${_wregDate}).\n\nName: ${name}\nWhatsApp: ${phone}${email ? '\nEmail: '+email : ''}${notes ? '\nNotes: '+notes : ''}`;
+      // Save registration to server
+      fetch('/api/registrations', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ workshop_name: _wregName, name, phone, email, notes })
+      }).catch(() => {});
+      const msg = `Hi! I'd like to register for the *${_wregName}* workshop.\n\nDate: ${_wregDate}${_wregPrice ? '\nPrice: AED ' + _wregPrice : ''}\nName: ${name}\nWhatsApp: ${phone}${email ? '\nEmail: '+email : ''}${notes ? '\nNotes: '+notes : ''}`;
       const waNum = document.querySelector('meta[name="wa-number"]')?.content || '971567894758';
       window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
       closeWregModal();
@@ -2474,6 +2503,11 @@
           if (c.hero.eyebrow) document.querySelector('.o-hero__eyebrow').textContent = c.hero.eyebrow;
           if (c.hero.body)    document.querySelector('.o-hero__body').textContent = c.hero.body;
           if (c.hero.cta)     document.querySelector('.o-hero__cta').textContent = c.hero.cta;
+          if (c.hero.line1) document.getElementById('hero-line1').textContent = c.hero.line1;
+          if (c.hero.line2) document.getElementById('hero-line2').textContent = c.hero.line2;
+          if (c.hero.line3) document.getElementById('hero-line3').textContent = c.hero.line3;
+          if (c.hero.line4) document.getElementById('hero-line4').textContent = c.hero.line4;
+          if (c.hero.line5) document.getElementById('hero-line5').textContent = c.hero.line5;
           // Slider images
           const slides = (c.hero.slides && c.hero.slides.length) ? c.hero.slides
                          : c.hero.image ? [c.hero.image] : null;
@@ -2485,7 +2519,10 @@
           if (c.about.image1)  document.querySelector('.s-about__ph1').src = c.about.image1;
           if (c.about.image2)  document.querySelector('.s-about__ph2').src = c.about.image2;
           if (c.about.label)   document.querySelector('.s-about__text .s-label').textContent = c.about.label;
-          if (c.about.heading) document.querySelector('.s-about__heading').innerHTML = c.about.heading.replace(/\n/g,'<br>');
+          if (c.about.heading) {
+            const hLines = c.about.heading.split('\n');
+            document.querySelector('.s-about__heading').innerHTML = hLines.map((l,i) => i === hLines.length-1 && hLines.length > 1 ? `<em>${l}</em>` : l).join('<br>');
+          }
           if (c.about.body)    document.querySelector('.s-about__body').textContent = c.about.body;
         }
 
@@ -2542,7 +2579,10 @@
         // Baker / Founder
         if (c.baker) {
           const b = c.baker;
-          if (b.name)   document.getElementById('baker-name').innerHTML = b.name.replace(/\n/g,'<br>');
+          if (b.name) {
+            const nLines = b.name.split('\n');
+            document.getElementById('baker-name').innerHTML = nLines.map((l,i) => i === nLines.length-1 && nLines.length > 1 ? `<em>${l}</em>` : l).join('<br>');
+          }
           if (b.title)  document.getElementById('baker-title').innerHTML = b.title;
           if (b.bio)    document.getElementById('baker-bio').textContent = b.bio;
           if (b.since)  document.getElementById('baker-since').textContent = 'Baking professionally since ' + b.since;
@@ -2606,45 +2646,54 @@
         }
 
         // Workshops
-        if (c.workshops) {
+        if (c.workshops && c.workshops.length) {
           const prevScroll = document.getElementById('workshops-prev-scroll');
           const newScroll = document.getElementById('workshops-new-scroll');
           const prevGroup = document.getElementById('workshops-prev-group');
           const newGroup = document.getElementById('workshops-new-group');
+          const past = c.workshops.filter(w => w.tag === 'past');
+          const upcoming = c.workshops.filter(w => w.tag === 'upcoming');
 
-          if (prevScroll && c.workshops.previous && c.workshops.previous.length) {
-            prevScroll.innerHTML = c.workshops.previous.map(w => `
-              <div class="s-wcard" onclick='openWimgModal(${JSON.stringify(w.name)}, ${JSON.stringify(w.images||[])})'>
-                <div class="s-wcard__img-wrap">
-                  <img class="s-wcard__img" src="${(w.images&&w.images[0])||'/brand_assets/uploads/placeholder.jpg'}" alt="${w.name}" loading="lazy">
-                </div>
-                <div class="s-wcard__body">
-                  <span class="s-wcard__badge">Past Workshop</span>
-                  <p class="s-wcard__name">${w.name}</p>
-                  <p class="s-wcard__date">${w.date||''}</p>
-                  <p class="s-wcard__desc">${w.desc||''}</p>
-                  <span class="s-wcard__cta">View Photos →</span>
-                </div>
-              </div>`).join('');
+          if (past.length && prevScroll) {
+            prevScroll.innerHTML = past.map(w => `
+          <div class="s-wcard" onclick='openWimgModal(${JSON.stringify(w.title)}, ${JSON.stringify(w.photos||[w.image||''])}, ${JSON.stringify(w.desc||'')})'>
+            <div class="s-wcard__img-wrap">
+              <img class="s-wcard__img" src="${w.image||''}" alt="${w.title}" loading="lazy">
+            </div>
+            <div class="s-wcard__body">
+              <span class="s-wcard__badge">Past Workshop</span>
+              <p class="s-wcard__name">${w.title}</p>
+              <p class="s-wcard__date">${w.date||''}</p>
+              <p class="s-wcard__desc">${w.desc||''}</p>
+              <span class="s-wcard__cta">View Photos →</span>
+            </div>
+          </div>`).join('');
+            if (prevGroup) prevGroup.style.display = '';
           } else if (prevGroup) { prevGroup.style.display = 'none'; }
 
-          if (newScroll && c.workshops.upcoming && c.workshops.upcoming.length) {
-            newScroll.innerHTML = c.workshops.upcoming.map(w => `
-              <div class="s-wcard s-wcard--new" onclick='openWregModal(${JSON.stringify(w.name)}, ${JSON.stringify(w.date||'')})'>
-                <div class="s-wcard__img-wrap">
-                  <img class="s-wcard__img" src="${w.image||'/brand_assets/uploads/placeholder.jpg'}" alt="${w.name}" loading="lazy">
-                </div>
-                <div class="s-wcard__body">
-                  <span class="s-wcard__badge">Upcoming</span>
-                  <p class="s-wcard__name">${w.name}</p>
-                  <p class="s-wcard__date">${w.date||''}</p>
-                  <p class="s-wcard__desc">${w.desc||''}</p>
-                  ${w.price ? `<p class="s-wcard__price">AED ${w.price}</p>` : ''}
-                  ${w.spots_left ? `<p class="s-wcard__spots">${w.spots_left} spots left</p>` : ''}
-                  <span class="s-wcard__cta">Register Now →</span>
-                </div>
-              </div>`).join('');
+          if (upcoming.length && newScroll) {
+            newScroll.innerHTML = upcoming.map(w => `
+          <div class="s-wcard s-wcard--new" onclick='openWregModal(${JSON.stringify(w.title)}, ${JSON.stringify(w.date||'')}, ${JSON.stringify(w.price||'')})'>
+            <div class="s-wcard__img-wrap">
+              <img class="s-wcard__img" src="${w.image||''}" alt="${w.title}" loading="lazy">
+            </div>
+            <div class="s-wcard__body">
+              <span class="s-wcard__badge">Upcoming</span>
+              <p class="s-wcard__name">${w.title}</p>
+              <p class="s-wcard__date">${w.date||''}</p>
+              <p class="s-wcard__desc">${w.desc||''}</p>
+              ${w.price ? `<p class="s-wcard__price">AED ${w.price}</p>` : ''}
+              ${w.spots ? `<p class="s-wcard__spots">${w.spots} spots left</p>` : ''}
+              <span class="s-wcard__cta">Register Now →</span>
+            </div>
+          </div>`).join('');
+            if (newGroup) newGroup.style.display = '';
           } else if (newGroup) { newGroup.style.display = 'none'; }
+        } else {
+          const prevGroup = document.getElementById('workshops-prev-group');
+          const newGroup = document.getElementById('workshops-new-group');
+          if (prevGroup) prevGroup.style.display = 'none';
+          if (newGroup) newGroup.style.display = 'none';
         }
 
         // Contact links
