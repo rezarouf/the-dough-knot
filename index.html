@@ -1450,44 +1450,6 @@
       .c-lightbox__arrow { width: 38px; height: 38px; font-size: 1.1em; }
     }
 
-    /* ── PAGE LOADER ── */
-    #o-loader {
-      position: fixed; inset: 0; z-index: 9999;
-      background: var(--c-bg);
-      display: flex; align-items: center; justify-content: center;
-      transform: translateY(0);
-      transition: transform 0.75s cubic-bezier(0.76, 0, 0.24, 1);
-      pointer-events: all;
-    }
-    #o-loader.is-hiding { transform: translateY(-100%); }
-    #o-loader.is-gone { display: none; }
-    .o-loader__inner {
-      display: flex; flex-direction: column; align-items: center; gap: 2.8em;
-    }
-    .o-loader__logo {
-      width: clamp(110px, 18vw, 210px);
-      opacity: 0;
-      animation: loaderLogo 0.95s 0.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-    @keyframes loaderLogo {
-      from { opacity: 0; transform: translateY(18px) scale(0.9); }
-      to   { opacity: 1; transform: translateY(0)    scale(1); }
-    }
-    .o-loader__bar-wrap {
-      width: clamp(80px, 12vw, 150px); height: 1px;
-      background: rgba(201,169,110,0.2); overflow: hidden;
-    }
-    .o-loader__bar {
-      width: 100%; height: 100%;
-      background: var(--c-gold);
-      transform: scaleX(0); transform-origin: left;
-      animation: loaderBar 1.1s 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-    @keyframes loaderBar {
-      from { transform: scaleX(0); }
-      to   { transform: scaleX(1); }
-    }
-
     /* ── WORKSHOPS ── */
     .s-workshops { padding: 0 5vw; }
     .s-workshops__hd { margin-bottom: 4vw; }
@@ -1665,14 +1627,6 @@
   </style>
 </head>
 <body>
-
-  <!-- ══ PAGE LOADER ══ -->
-  <div id="o-loader" aria-hidden="true">
-    <div class="o-loader__inner">
-      <img class="o-loader__logo" src="/brand_assets/DOUGH KNOT LOGO PNG.png" alt="The Dough Knot">
-      <div class="o-loader__bar-wrap"><div class="o-loader__bar"></div></div>
-    </div>
-  </div>
 
   <!-- ══ FLOATING LOGO ══ -->
   <a href="/" class="c-logo" aria-label="The Dough Knot home">
@@ -2330,16 +2284,9 @@
       tick();
     })();
 
-    /* Page loader — lifts after bar fills, then triggers hero */
+    /* Hero entrance on load */
     window.addEventListener('load', () => {
-      const loader = document.getElementById('o-loader');
-      setTimeout(() => {
-        loader.classList.add('is-hiding');
-        document.body.classList.add('hero-loaded');
-        loader.addEventListener('transitionend', () => {
-          loader.classList.add('is-gone');
-        }, { once: true });
-      }, 1900);
+      document.body.classList.add('hero-loaded');
     });
 
     /* Nav scroll state + active link highlighting */
