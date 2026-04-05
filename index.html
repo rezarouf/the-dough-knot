@@ -17,6 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,700&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     /* ── ROOT TOKENS ── */
     :root {
@@ -41,6 +42,7 @@
       background-repeat: no-repeat;
       margin: 0; padding: 0;
     }
+    a { color: inherit; text-decoration: none; }
 
     body {
       background-color: var(--c-bg);
@@ -407,8 +409,10 @@
 
     /* ── ABOUT / HOURS ── */
     .s-about {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6vw; padding: 0 5vw; align-items: center;
+      padding: 0 5vw; align-items: center;
+    }
+    @media (min-width: 768px) {
+      .s-about__text { padding-left: 6vw; }
     }
 
     .s-about__photos { position: relative; height: 44vw; }
@@ -697,8 +701,10 @@
     /* ── BAKER / FOUNDER ── */
     .s-baker { padding: 0 5vw; }
     .s-baker__inner {
-      display: grid; grid-template-columns: 1fr 1.3fr;
-      gap: 7vw; align-items: center;
+      align-items: center;
+    }
+    @media (min-width: 768px) {
+      .s-baker__text { padding-left: 7vw; }
     }
     .s-baker__card {
       background: var(--c-surface);
@@ -760,10 +766,7 @@
       letter-spacing: -0.025em;
       color: var(--c-cream); margin-top: 0.5em;
     }
-    .s-testimonials__grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1.2vw;
-    }
+    .s-testimonials__grid { gap: 0; }
     .s-tcard {
       background: var(--c-surface);
       border: 1px solid var(--c-gold-dim);
@@ -920,8 +923,7 @@
     }
 
     .o-footer__top {
-      display: grid; grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 5vw; padding-bottom: 4vw; margin-bottom: 3vw;
+      padding-bottom: 4vw; margin-bottom: 3vw;
       border-bottom: 1px solid rgba(255,255,255,0.055);
     }
 
@@ -1018,8 +1020,7 @@
 
     /* Two option cards */
     .s-order__opts {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 2px; max-width: 900px; margin: 0 auto;
+      max-width: 900px; margin: 0 auto;
     }
     .s-order__opt {
       background: var(--c-surface);
@@ -1224,24 +1225,15 @@
        RESPONSIVE — TABLET  ≤ 900px
     ══════════════════════════════════════ */
     @media (max-width: 900px) {
-      .s-about {
-        grid-template-columns: 1fr;
-        gap: 8vw;
-      }
       .s-about__photos { height: 70vw; }
       .s-about__heading { font-size: 6vw; }
 
-      .s-baker__inner { grid-template-columns: 1fr; gap: 8vw; }
       .s-baker__name { font-size: 7vw; }
 
       .s-gallery__grid { grid-template-columns: repeat(3, 1fr); }
 
-      .s-testimonials__grid { grid-template-columns: repeat(2, 1fr); gap: 2vw; }
-
       .s-bestsellers__grid { grid-template-columns: repeat(3, 1fr); gap: 2.5vw; }
       .c-order-float { bottom: 1.8em; right: 1.8em; }
-
-      .o-footer__top { grid-template-columns: 1fr 1fr; gap: 6vw; }
     }
 
     /* ══════════════════════════════════════
@@ -1306,7 +1298,7 @@
       .o-hero__progress { height: 3px; }
 
       /* ── ABOUT ── */
-      .s-about { grid-template-columns: 1fr; gap: 8vw; padding: 0 6vw; }
+      .s-about { padding: 0 5vw; }
       .s-about__photos { height: 75vw; }
       .s-about__ph2 { width: 52%; height: 65%; bottom: -6%; right: -4%; }
       .s-about__heading { font-size: clamp(1.8rem, 7.5vw, 2.8rem); margin-bottom: 1em; }
@@ -1370,7 +1362,6 @@
 
       /* ── BAKER ── */
       .s-baker { padding: 0 5vw; }
-      .s-baker__inner { grid-template-columns: 1fr; gap: 8vw; }
       .s-baker__card { padding: 2.4em 2em; border-radius: 0.6em; }
       .s-baker__lavonne { max-height: 2.8em; margin-bottom: 2em; }
       .s-baker__cred { font-size: 0.82em; gap: 0.9em; margin-bottom: 1.2em; }
@@ -1404,7 +1395,6 @@
       .s-testimonials { padding: 0 5vw; }
       .s-testimonials__hd { margin-bottom: 8vw; }
       .s-testimonials__title { font-size: clamp(2rem, 8.5vw, 3rem); }
-      .s-testimonials__grid { grid-template-columns: 1fr; gap: 4vw; }
       .s-tcard { padding: 2em 1.8em; }
       .s-tcard__quote { font-size: 2.8em; }
       .s-tcard__text { font-size: 0.9em; }
@@ -1414,7 +1404,6 @@
       .s-order__hd { margin-bottom: 8vw; }
       .s-order__heading { font-size: clamp(2rem, 9vw, 3.2rem); line-height: 1.0; }
       .s-order__body { font-size: 0.88em; }
-      .s-order__opts { grid-template-columns: 1fr; gap: 3vw; }
       .s-order__opt { padding: 2.4em 2em; border-radius: 0.6em; }
       .s-order__opt { font-size: clamp(14px, 4vw, 17px); }
       .s-order__opt-title { font-size: 1.5em; }
@@ -1434,7 +1423,6 @@
 
       /* ── FOOTER ── */
       .o-footer { padding: 14vw 6vw 8vw; }
-      .o-footer__top { grid-template-columns: 1fr; gap: 8vw; }
       .o-footer__bottom { flex-direction: column; gap: 0.6em; text-align: center; font-size: 0.78em; }
       .o-footer__logo img { height: 8em; }
       .o-footer__tagline { font-size: 0.9em; }
@@ -1728,8 +1716,8 @@
 
   <!-- ══ ABOUT / HOURS ══ -->
   <section class="o-home_section" id="about">
-    <div class="s-about">
-      <div class="s-about__photos" data-animate="left">
+    <div class="s-about row gx-0 gy-5 align-items-center">
+      <div class="s-about__photos col-12 col-md-6" data-animate="left">
         <img
           class="s-about__ph1"
           src="/brand_assets/Images/WhatsApp%20Image%202026-03-26%20at%205.14.09%20PM.jpeg"
@@ -1741,7 +1729,7 @@
           alt="Pink rose cupcakes"
         >
       </div>
-      <div class="s-about__text" data-animate="right">
+      <div class="s-about__text col-12 col-md-6" data-animate="right">
         <p class="s-label">Our Story</p>
         <h2 class="s-about__heading">Made from scratch,<br>baked with heart</h2>
         <p class="s-about__body">
@@ -1827,8 +1815,8 @@
 
   <!-- ══ BAKER / FOUNDER ══ -->
   <section class="o-home_section s-baker" id="baker">
-    <div class="s-baker__inner">
-      <div class="s-baker__card" data-animate="left">
+    <div class="s-baker__inner row gx-0 gy-5 align-items-center">
+      <div class="s-baker__card col-12 col-md-5" data-animate="left">
         <img class="s-baker__lavonne" id="lavonne-logo"
           src="https://www.lavonne.in/wp-content/uploads/2018/03/lavonne-logo-white.png"
           alt="Lavonne Academy of Baking Science and Pastry Arts"
@@ -1846,7 +1834,7 @@
           <span>Now based in Dubai, UAE — bringing artisan baking to your door</span>
         </div>
       </div>
-      <div class="s-baker__text" data-animate="right">
+      <div class="s-baker__text col-12 col-md-7" data-animate="right">
         <p class="s-label">Meet the Baker</p>
         <h2 class="s-baker__name" id="baker-name">Naurah<br>Nafeesa</h2>
         <p class="s-baker__founder-title" id="baker-title">Pastry Chef &amp; Founder</p>
@@ -2044,7 +2032,7 @@
       <p class="s-label">Happy Customers</p>
       <h2 class="s-testimonials__title s-section-heading">What They're<br><em>Saying</em></h2>
     </div>
-    <div class="s-testimonials__grid" id="testimonials-grid"></div>
+    <div class="s-testimonials__grid row g-3" id="testimonials-grid"></div>
   </section>
 
   <!-- ══ WORKSHOPS ══ -->
@@ -2113,10 +2101,10 @@
     </div>
 
     <!-- Two option cards -->
-    <div class="s-order__opts" data-animate="fade" data-delay="120">
+    <div class="s-order__opts row gx-0 gy-3" data-animate="fade" data-delay="120">
 
       <!-- WhatsApp card -->
-      <a href="https://wa.me/971567894758" class="s-order__opt s-order__opt--wa" target="_blank" rel="noopener">
+      <div class="col-12 col-md-6"><a href="https://wa.me/971567894758" class="s-order__opt s-order__opt--wa" target="_blank" rel="noopener" style="height:100%">
         <div class="s-order__opt-icon">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </div>
@@ -2126,10 +2114,10 @@
           Open WhatsApp
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
         </div>
-      </a>
+      </a></div>
 
       <!-- Submit request card -->
-      <button type="button" class="s-order__opt s-order__opt--form" onclick="toggleOrderForm()" id="form-toggle">
+      <div class="col-12 col-md-6"><button type="button" class="s-order__opt s-order__opt--form" onclick="toggleOrderForm()" id="form-toggle" style="height:100%;width:100%">
         <div class="s-order__opt-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
         </div>
@@ -2139,7 +2127,7 @@
           Fill Out the Form
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v12M2 9l6 6 6-6"/></svg>
         </div>
-      </button>
+      </button></div>
     </div>
 
     <!-- Expandable form -->
@@ -2194,8 +2182,8 @@
 
   <!-- ══ FOOTER ══ -->
   <footer class="o-footer">
-    <div class="o-footer__top">
-      <div data-animate="left">
+    <div class="o-footer__top row gx-0 gy-5">
+      <div class="col-12 col-md-5" data-animate="left">
         <a href="/" class="o-footer__logo" aria-label="The Dough Knot home">
           <img src="/brand_assets/DOUGH KNOT LOGO PNG.png" alt="The Dough Knot">
         </a>
@@ -2203,7 +2191,7 @@
           Cakes, desserts &amp; more — handcrafted with love, baked for you in the heart of Dubai.
         </p>
       </div>
-      <div data-animate data-delay="100">
+      <div class="col-12 col-md-3" data-animate data-delay="100">
         <p class="o-footer__col-hd">Navigate</p>
         <div class="o-footer__links">
           <a href="#about">Our Story</a>
@@ -2214,7 +2202,7 @@
           <a href="#custom">Order a Cake</a>
         </div>
       </div>
-      <div data-animate data-delay="200">
+      <div class="col-12 col-md-4" data-animate data-delay="200">
         <p class="o-footer__col-hd">Connect</p>
         <div class="o-footer__links">
           <a href="https://www.instagram.com/thedoughknot.ae/" target="_blank" rel="noopener">Instagram</a>
@@ -2601,17 +2589,17 @@
           if (grid) {
             grid.innerHTML = c.testimonials.map(t => {
               if (t.type === 'image' && t.image) {
-                return `<div class="s-tcard s-tcard--img" data-animate="scale">
+                return `<div class="col-12 col-md-4"><div class="s-tcard s-tcard--img" data-animate="scale">
                   <img src="${t.image}" alt="${t.name || 'Customer review'}">
-                </div>`;
+                </div></div>`;
               }
               const stars = t.rating ? '★'.repeat(t.rating) + '☆'.repeat(5 - t.rating) : '★★★★★';
-              return `<div class="s-tcard" data-animate="scale">
+              return `<div class="col-12 col-md-4"><div class="s-tcard" data-animate="scale">
                 <span class="s-tcard__quote">"</span>
                 <div class="s-tcard__stars">${stars}</div>
                 <p class="s-tcard__text">${t.text || ''}</p>
                 <p class="s-tcard__name">${t.name || ''}</p>
-              </div>`;
+              </div></div>`;
             }).join('');
             if (document.body.classList.contains('is-animated')) {
               grid.querySelectorAll('[data-animate]').forEach((el, i) => {
@@ -2889,5 +2877,6 @@
     Order Now
   </a>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
