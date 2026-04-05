@@ -127,11 +127,11 @@
       transform: translateY(100%);
     }
     .hero-loaded .word {
-      animation: fadeUp 0.9s var(--ease-out) forwards;
+      animation: fadeUp 0.55s var(--ease-out) forwards;
     }
-    .hero-loaded .o-hero__eyebrow { animation: fadeIn 0.7s 0.1s ease both; }
-    .hero-loaded .o-hero__body    { animation: fadeUp 0.7s 0.8s var(--ease-out) both; }
-    .hero-loaded .o-hero__cta     { animation: scaleUp 0.6s 1s var(--ease-spring) both; }
+    .hero-loaded .o-hero__eyebrow { animation: fadeIn 0.4s 0.05s ease both; }
+    .hero-loaded .o-hero__body    { animation: fadeUp 0.45s 0.45s var(--ease-out) both; }
+    .hero-loaded .o-hero__cta     { animation: scaleUp 0.4s 0.6s var(--ease-spring) both; }
 
     /* ── NAV ── */
     /* ── STANDALONE LOGO — centered, above nav ── */
@@ -1714,10 +1714,10 @@
     <p class="o-hero__eyebrow">Cakes, Desserts &amp; More · Dubai, UAE</p>
     <div class="o-hero__content">
       <h1 class="o-hero__title">
-        <span class="word-wrap"><span class="word" id="hero-line1" style="animation-delay:0.05s">Made to</span></span><br>
-        <em><span class="word-wrap"><span class="word" id="hero-line2" style="animation-delay:0.18s">Order,</span></span></em><br>
-        <span class="word-wrap"><span class="word" id="hero-line3" style="animation-delay:0.30s">Baked</span></span><br>
-        <span class="word-wrap"><span class="word" id="hero-line4" style="animation-delay:0.42s">with</span></span><em style="margin-left:0.22em"><span class="word-wrap"><span class="word" id="hero-line5" style="animation-delay:0.48s">Love.</span></span></em>
+        <span class="word-wrap"><span class="word" id="hero-line1" style="animation-delay:0.02s">Made to</span></span><br>
+        <em><span class="word-wrap"><span class="word" id="hero-line2" style="animation-delay:0.09s">Order,</span></span></em><br>
+        <span class="word-wrap"><span class="word" id="hero-line3" style="animation-delay:0.16s">Baked</span></span><br>
+        <span class="word-wrap"><span class="word" id="hero-line4" style="animation-delay:0.23s">with</span></span><em style="margin-left:0.22em"><span class="word-wrap"><span class="word" id="hero-line5" style="animation-delay:0.28s">Love.</span></span></em>
       </h1>
       <p class="o-hero__body">
         Every bite handcrafted with love — from showstopping celebration cakes to the perfect everyday indulgence.
@@ -2283,7 +2283,7 @@
     })();
 
     /* Hero entrance on load */
-    window.addEventListener('load', () => {
+    document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add('hero-loaded');
     });
 
